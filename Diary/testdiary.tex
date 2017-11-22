@@ -1,5 +1,6 @@
 \documentclass[a4paper,11pt]{article}
 \usepackage{fullpage}
+\usepackage{amsmath}
 \usepackage[
     backend=biber,
     style=ieee,
@@ -24,8 +25,15 @@
 For 2-D arrays it is equivalent to matrix multiplication, and for 1-D arrays to inner product of vectors (without complex conjugation). For N dimensions it is a sum product over the last axis of a and the second-to-last of b:
 
     dot(a, b)[i,j,k,m] = sum(a[i,j,:] * b[k,:,m])
-    takes: two arrays a,b
-    
+   \paragraph{Paramaters}: two arrays a: array\_like First argument.\\
+b : array\_like Second argument.\\
+out : ndarray, optional output argument. This must have the exact kind that would be returned if it was not used. In particular, it must have the right type, must be C-contiguous, and its dtype must be the dtype that would be returned for dot(a,b). This is a performance feature. Therefore, if these conditions are not met, an exception is raised, instead of attempting to be flexible.
+    \paragraph{Returns}:    output : ndarray\\
+Returns the dot product of a and b. If a and b are both scalars or both 1-D arrays then a scalar is returned; otherwise an array is returned. If out is given, then it is returned.
+Raises: 
+ValueError
+If the last dimension of a is not the same size as the second-to-last dimension of b.
+
 \subsection{linalg.multidot}
 Compute the dot product of two or more arrays in a single function call, while automatically selecting the fastest evaluation order.
 
@@ -37,80 +45,184 @@ If the first argument is 1-D it is treated as a row vector. If the last argument
 \subsection{linalg.vdot}
 
 \subsubsection{documentation}
+Return the dot product of two vectors.
+
+The vdot(a, b) function handles complex numbers differently than dot(a, b). If the first argument is complex the complex conjugate of the first argument is used for the calculation of the dot product.
+
+Note that vdot handles multidimensional arrays differently than dot: it does not perform a matrix product, but flattens input arguments to 1-D vectors first. Consequently, it should only be used for vectors.
 \subsubsection{tests}
 
 \subsection{linalg.inner}
-
 \subsubsection{documentation}
+Inner product of two arrays.
+
+Ordinary inner product of vectors for 1-D arrays (without complex conjugation), in higher dimensions a sum product over the last axes.
+
 \subsubsection{tests}
 \subsection{linalg.outer}
-
 \subsubsection{documentation}
+Compute the outer product of two vectors.
+
+\paragraph{Paramaters}: 
+a : (M,) array\_like
+First input vector. Input is flattened if not already 1-dimensional.
+b : (N,) array\_like
+Second input vector. Input is flattened if not already 1-dimensional.\\
+out : (M, N) ndarray, optional
+A location where the result is stored\\
+\paragraph{Returns}:    
+out : (M, N) ndarray
+out[i, j] = a[i] * b[j]
+
 \subsubsection{tests}
-\subsection{linalg.matmul}
 
+\subsection{linalg.matmul}
 \subsubsection{documentation}
+Matrix product of two arrays.\\
+
+The behavior depends on the arguments in the following way.\\
+
+If both arguments are 2-D they are multiplied like conventional matrices.\\
+If either argument is N-D, N > 2, it is treated as a stack of matrices residing in the last two indexes and broadcast accordingly.\\
+If the first argument is 1-D, it is promoted to a matrix by prepending a 1 to its dimensions. After matrix multiplication the prepended 1 is removed.\\
+If the second argument is 1-D, it is promoted to a matrix by appending a 1 to its dimensions. After matrix multiplication the appended 1 is removed.\\
+Multiplication by a scalar is not allowed, use * instead. Note that multiplying a stack of matrices with a vector will result in a stack of vectors, but matmul will not recognize it as such.\\
+
 \subsubsection{tests}
 \subsection{linalg.tensordot}
-
 \subsubsection{documentation}
-\subsubsection{tests}
-\subsection{linalg.einsum}
+Compute tensor dot product along specified axes for arrays >= 1-D.
 
-\subsubsection{documentation}
+Given two tensors (arrays of dimension greater than or equal to one), a and b, and an array\_like object containing two array\_like objects, (a\_axes, b\_axes), sum the products of a‘s and b‘s elements (components) over the axes specified by a\_axes and b\_axes. The third argument can be a single non-negative integer\_like scalar, N; if it is such, then the last N dimensions of a and the first N dimensions of b are summed over.
+
 \subsubsection{tests}
+%\subsection{linalg.einsum}
+%\subsubsection{documentation}
+
+
+%\subsubsection{tests}
 \subsection{linalg.matrix\_power}
-
 \subsubsection{documentation}
-\subsubsection{tests}
-\subsection{linalg.kron}
+Raise a square matrix to the (integer) power n.\\
 
-\subsubsection{documentation}
+For positive integers n, the power is computed by repeated matrix squarings and matrix multiplications. If n == 0, the identity matrix of the same shape as M is returned. If n < 0, the inverse is computed and then raised to the abs(n).
 \subsubsection{tests}
+%\subsection{linalg.kron}
+%\subsubsection{documentation}
+
+
+%\subsubsection{tests}
 \subsection{linalg.eig}
+Compute the eigenvalues and right eigenvectors of a square array.
+\paragraph{Paramaters}: 
+a : (..., M, M) array\\
+\paragraph{Returns}:    
+w : (..., M) array\\
+Raises: 
+LinAlgError
+If the eigenvalue computation does not converge.
 
 \subsubsection{documentation}
 \subsubsection{tests}
 \subsection{linalg.eigh}
 
 \subsubsection{documentation}
-\subsubsection{tests}
-\subsection{linalg.eigvals}
+Return the eigenvalues and eigenvectors of a Hermitian or symmetric matrix.
 
-\subsubsection{documentation}
+Returns two objects, a 1-D array containing the eigenvalues of a, and a 2-D square array or matrix (depending on the input type) of the corresponding eigenvectors (in columns).
+\paragraph{Paramaters}: 
+a : (..., M, M) array\\
+\paragraph{Returns}:    
+w : (..., M) ndarray
+The eigenvalues in ascending order, each repeated according to its multiplicity.\\
+Raises: 
+LinAlgError
+If the eigenvalue computation does not converge.\\
+
+
+
 \subsubsection{tests}
 \subsection{linalg.eigvalsh}
-
 \subsubsection{documentation}
+Compute the eigenvalues of a Hermitian or real symmetric matrix.
+
+Main difference from eigh: the eigenvectors are not computed.
+\paragraph{Paramaters}: 
+a : (..., M, M) array\_like\\
+\paragraph{Returns}:    
+w : (..., M,) ndarray
+The eigenvaues in ascending order, each repeated according to its multiplicity.\\
+Raises: 
+LinAlgError if the eigenvalue computation does not converge.
+
+\subsubsection{tests}
+\subsection{linalg.eigvals}
+\subsubsection{documentation}
+Compute the eigenvalues of a general matrix.
+
+Main difference between eigvals and eig: the eigenvectors aren’t returned.
+
+
+\paragraph{Paramaters}: 
+a : (..., M, M) array\_like
+A complex- or real-valued matrix whose eigenvalues will be computed.\\
+\paragraph{Returns}:    
+w : (..., M,) ndarray
+The eigenvalues, each repeated according to its multiplicity. They are not necessarily ordered, nor are they necessarily real for real matrices.\\
+Raises: 
+LinAlgError
+If the eigenvalue computation does not converge.\\
 \subsubsection{tests}
 \subsection{linalg.norm}
-
 \subsubsection{documentation}
+Matrix or vector norm.
+
+This function is able to return one of eight different matrix norms, or one of an infinite number of vector norms (described below), depending on the value of the ord parameter.\\
+
+\paragraph{Paramaters}: 
+x : array\_like
+Input array. If axis is None, x must be 1-D or 2-D.
+ord : {non-zero int, inf, -inf, ‘fro’, ‘nuc’}, optional
+Order of the norm (see table under Notes). inf means numpy’s inf object.
+axis : {int, 2-tuple of ints, None}, optional
+If axis is an integer, it specifies the axis of x along which to compute the vector norms. If axis is a 2-tuple, it specifies the axes that hold 2-D matrices, and the matrix norms of these matrices are computed. If axis is None then either a vector norm (when x is 1-D) or a matrix norm (when x is 2-D) is returned.
+keepdims : bool, optional
+If this is set to True, the axes which are normed over are left in the result as dimensions with size one. With this option the result will broadcast correctly against the original x.
+New in version 1.10.0.\\
+
+\paragraph{Returns}:    
+n : float or ndarray
+Norm of the matrix or vector(s).\\
+
 \subsubsection{tests}
 \subsection{linalg.cond}
-
 \subsubsection{documentation}
+
+
 \subsubsection{tests}
 \subsection{linalg.det}
-
 \subsubsection{documentation}
+
 \subsubsection{tests}
 \subsection{linalg.matrix\_rank}
+\subsubsection{documentation}
 
-\subsubsection{documentation}
 \subsubsection{tests}
-\subsection{linalg.slogdet}
-    
+\subsection{linalg.slogdet}    
 \subsubsection{documentation}
+
 \subsubsection{tests}
 \subsection{linalg.trace}
-
 \subsubsection{documentation}
+
 \subsubsection{tests}
 \subsection{linalg.det}
-
 \subsubsection{documentation}
+
 \subsubsection{tests}
+
+
+\section{White-Box Test}
 
 
 \end{document}
