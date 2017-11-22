@@ -18,15 +18,15 @@
     \renewcommand{\thesubsection}{\thesection.\Alph{subsection}}
 
     \begin{document}
-
-\section{linalg.dot}:
+\section{Black-box Testing}
+\subsection{linalg.dot}
 \subsubsection{documentation}
 For 2-D arrays it is equivalent to matrix multiplication, and for 1-D arrays to inner product of vectors (without complex conjugation). For N dimensions it is a sum product over the last axis of a and the second-to-last of b:
 
     dot(a, b)[i,j,k,m] = sum(a[i,j,:] * b[k,:,m])
     takes: two arrays a,b
     
-documentation for linalg.multidot:
+\subsection{linalg.multidot}
 Compute the dot product of two or more arrays in a single function call, while automatically selecting the fastest evaluation order.
 
 multi\_dot chains numpy.dot and uses optimal parenthesization of the matrices [R44] [R45]. Depending on the shapes of the matrices, this can speed up the multiplication a lot.
@@ -34,80 +34,80 @@ multi\_dot chains numpy.dot and uses optimal parenthesization of the matrices [R
 If the first argument is 1-D it is treated as a row vector. If the last argument is 1-D it is treated as a column vector. The other arguments must be 2-D.
 \subsubsection{tests}
 
-documentation for linalg.vdot:
+\subsection{linalg.vdot}
 
 \subsubsection{documentation}
 \subsubsection{tests}
 
-documentation for linalg.inner:
+\subsection{linalg.inner}
 
 \subsubsection{documentation}
 \subsubsection{tests}
-documentation for linalg.outer:
+\subsection{linalg.outer}
 
 \subsubsection{documentation}
 \subsubsection{tests}
-documentation for linalg.matmul:
+\subsection{linalg.matmul}
 
 \subsubsection{documentation}
 \subsubsection{tests}
-documentation for linalg.tensordot:
+\subsection{linalg.tensordot}
 
 \subsubsection{documentation}
 \subsubsection{tests}
-documentation for linalg.einsum:
+\subsection{linalg.einsum}
 
 \subsubsection{documentation}
 \subsubsection{tests}
-documentation for linalg.matrix\_power:
+\subsection{linalg.matrix\_power}
 
 \subsubsection{documentation}
 \subsubsection{tests}
-documentation for linalg.kron:
+\subsection{linalg.kron}
 
 \subsubsection{documentation}
 \subsubsection{tests}
-documentation for linalg.eig:
+\subsection{linalg.eig}
 
 \subsubsection{documentation}
 \subsubsection{tests}
-documentation for linalg.eigh:
+\subsection{linalg.eigh}
 
 \subsubsection{documentation}
 \subsubsection{tests}
-documentation for linalg.eigvals:
+\subsection{linalg.eigvals}
 
 \subsubsection{documentation}
 \subsubsection{tests}
-documentation for linalg.eigvalsh:
+\subsection{linalg.eigvalsh}
 
 \subsubsection{documentation}
 \subsubsection{tests}
-documentation for linalg.norm:
+\subsection{linalg.norm}
 
 \subsubsection{documentation}
 \subsubsection{tests}
-documentation for linalg.cond:
+\subsection{linalg.cond}
 
 \subsubsection{documentation}
 \subsubsection{tests}
-documentation for linalg.det:
+\subsection{linalg.det}
 
 \subsubsection{documentation}
 \subsubsection{tests}
-documentation for linalg.matrix\_rank:
+\subsection{linalg.matrix\_rank}
 
 \subsubsection{documentation}
 \subsubsection{tests}
-documentation for linalg.slogdet:
+\subsection{linalg.slogdet}
     
 \subsubsection{documentation}
 \subsubsection{tests}
-documentation for linalg.trace:
+\subsection{linalg.trace}
 
 \subsubsection{documentation}
 \subsubsection{tests}
-documentation for linalg.det:
+\subsection{linalg.det}
 
 \subsubsection{documentation}
 \subsubsection{tests}
