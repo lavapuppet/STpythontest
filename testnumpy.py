@@ -3,7 +3,7 @@ import unittest
 
 class TestLinAlg(unittest.TestCase):
     """
-    NP.DOT()
+    NP.DOT() function
     """
 
     def setUp(self):
