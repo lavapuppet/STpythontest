@@ -3,8 +3,12 @@ import unittest
 
 class TestLinAlg(unittest.TestCase):
     """
+<<<<<<< HEAD
     NP.DOT()
     testing55
+=======
+    NP.DOT() function
+>>>>>>> 9c3e2e099d489829acd321758644fd26059dd104
     """
 
     def setUp(self):
