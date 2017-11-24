@@ -1,0 +1,2 @@
+class TestDatatypes:
+    pass
