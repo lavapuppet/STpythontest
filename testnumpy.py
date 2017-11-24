@@ -8,7 +8,10 @@ class TestLinAlg(unittest.TestCase):
     testing55
 =======
     NP.DOT() function
->>>>>>> 9c3e2e099d489829acd321758644fd26059dd104
+# >>>>>>> 9c3e2e099d489829acd321758644fd26059dd104
+
+JOHAN testing...
+JOHAN testing 2
     """
 
     def setUp(self):

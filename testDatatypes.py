@@ -19,12 +19,18 @@ from numpy.testing import (
 
 import unittest
 
+# GLOBAL FUNCTIONS
+def get_real_dtype(dtype):
+    return {single: single, double: double,
+            csingle: single, cdouble: double}[dtype]
+
 
 class LinalgCase(object):
     def __init__(self, name, a, b, tags=set()):
         """
         A bundle of arguments to be passed to a test case, with an identifying
         name, the operands a and b, and a set of tags to filter the tests
+        aaaaaaTest
         """
         assert_(isinstance(name, str))
         self.name = name
@@ -60,10 +66,43 @@ class TestDatatypes(unittest.TestCase):
         x = np.array([[1, 0.5], [0.5, 1]], dtype=single)
         assert_equal(linalg.solve(x, x).dtype, single)
 
-    def test_EigTypes(self):
+    def test_EigvalTypes(self):
         def check(dtype):
             x = np.array([[1, 0.5], [0.5, 1]], dtype=dtype)
             assert_equal(linalg.eigvals(x).dtype, dtype)
+        for dtype in [single, double, csingle, cdouble]:
+            yield check, dtype
+
+    def test_EigvalHermitianTypes(self):
+        def check(dtype):
+            x = np.array([[1, 0.5], [0.5, 1]], dtype=dtype)
+            w = np.linalg.eigvalsh(x)
+            assert_equal(w.dtype, get_real_dtype(dtype))
+        for dtype in [single, double, csingle, cdouble]:
+            yield check, dtype
+
+    def test_EigTypes(self):
+        def check(dtype):
+            x = np.array([[1, 0.5], [0.5, 1]], dtype=dtype)
+            w, v = np.linalg.eig(x)
+            assert_equal(w.dtype, dtype)
+            assert_equal(v.dtype, dtype)
+
+        for dtype in [single, double, csingle, cdouble]:
+            yield check, dtype
+
+    def test_SVDtypes(self):
+        def check(dtype):
+            x = np.array([[1, 0.5], [0.5, 1]], dtype=dtype)
+            u, s, vh = linalg.svd(x)
+            assert_equal(u.dtype, dtype)
+        for dtype in [single, double, csingle, cdouble]:
+            yield check, dtype
+
+    def test_determinantTypes(self):
+        def check(dtype):
+            x = np.array([[1, 0.5], [0.5, 1]], dtype=dtype)
+            assert_equal(np.linalg.det(x).dtype, dtype)
         for dtype in [single, double, csingle, cdouble]:
             yield check, dtype
 
