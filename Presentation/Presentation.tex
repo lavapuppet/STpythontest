@@ -4,6 +4,8 @@
 \xdefinecolor{darkgreen}{rgb}{0,0.35,0}
 \usecolortheme[named=darkgreen]{structure}
 \beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\usepackage{graphicx}
+
 \begin{document}
 \title{Software Testing the Numpy Linear Algebra Library}  
 \author{Group 7}
@@ -68,9 +70,32 @@ Test to see if the inputs/outputs match what is given in the documentation
 \item Standard inputs
 \item edge cases
 \item Exceptions 
-
 \end{itemize}
 \end{frame}
+
+\begin{frame}\frametitle{Black Box Testing: Example numpy.linalg.dot()} 
+Testing the basic properties of a dot product 
+\begin{itemize}
+	\item $ a \bullet b = b \bullet a $
+	\item $ a \bullet (\textbf{r}b + c) = \textbf{r}(a \bullet b) + (a \bullet c) $
+	\\
+	\item $ a \bullet 0 = 0 $
+	\item $ a \bullet a = | a^2 |$
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}\frametitle{Black Box Testing: Raising Exception} 
+Since it is not possible to multiply to matrices if their last dimension are not the same.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.70\textwidth]{images/raises.png}
+	\caption{Raising exception in dot product.}
+	\label{fig:rai}
+\end{figure}
+\end{frame}
+
 
 \begin{frame}\frametitle{White-Box testing} 
 \begin{itemize}
@@ -110,7 +135,7 @@ Any Questions?
 \begin{frame}
 \begin{itemize}
 \item non-square: 
-\\ CASES += LinalgCase("single_nsq_1", array([[1., 2., 3.], [3., 4., 6.]], dtype=single), array([2., 1.], dtype=single)),
+\\ CASES += LinalgCase("single$_nsq_$1", array([[1., 2., 3.], [3., 4., 6.]], dtype=single),array([2., 1.], dtype=single)),
 \item Hermitian: 
 \\CASES += LinalgCase("hsingle", array([[1., 2.], [2., 1.]], dtype=single), None),
 \item Combine the 3 above types into generic object
