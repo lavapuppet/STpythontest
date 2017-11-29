@@ -1,4 +1,3 @@
-
 \documentclass{beamer}
 \setbeamertemplate{navigation symbols}{}
 \usetheme{Warsaw}
@@ -86,5 +85,47 @@ Test to see if the inputs/outputs match what is given in the documentation
 Any Questions?
 \end{frame}
 
-\end{document}
+\begin{frame}
+\begin{itemize}
+\item numpy’s own tests
+\\ Test functions for linalg module”, 1700 rows. 
+\\ class LinalgCase(object):
+\\ don’t test raw data, they first build test objects containing 4 objects. 
+\\ self.name; self.a; self.b; self.tags  
+\end{itemize}
+\end{frame}
 
+\begin{frame}
+\begin{itemize}
+\item 3 main types of cases (tags): square or non-square, Hermitian
+\item square:
+\\CASES = []
+\\ CASES +=  LinalgCase("single", array([[1., 2.], [3., 4.]], dtype=single), array([2., 1.], dtype=single)),
+\\ CASES +=   LinalgCase("cdouble", array([[1. + 2j, 2 + 3j], [3 + 4j, 4 + 5j]], dtype=cdouble), array([2. + 1j, 1. + 2j], dtype=cdouble)),
+\\ CASES +=  LinalgCase("8x8", np.random.rand(8, 8), np.random.rand(8)),
+\\  0x0, 1x1, "nonarray", "matrixOnly", "2matrices", 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item non-square: 
+\\ CASES += LinalgCase("single_nsq_1", array([[1., 2., 3.], [3., 4., 6.]], dtype=single), array([2., 1.], dtype=single)),
+\item Hermitian: 
+\\CASES += LinalgCase("hsingle", array([[1., 2.], [2., 1.]], dtype=single), None),
+\item Combine the 3 above types into generic object
+\\def $_make_generalized_cases():$
+\item Get all combination of all cases – Cartesian product. 
+\\def $_make_strided_cases(): #stride combination$ 
+\item Now the testing part starts:
+\item class LinalgSquareTestCase(object):
+\\def $test_sq_cases(self):$
+\end{itemize}
+\end{frame}
+
+
+
+
+\end{frame}
+
+\end{document}
