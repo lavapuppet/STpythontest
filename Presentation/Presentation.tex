@@ -1,0 +1,73 @@
+
+\documentclass{beamer}
+\setbeamertemplate{navigation symbols}{}
+\usetheme{Warsaw}
+\xdefinecolor{darkgreen}{rgb}{0,0.35,0}
+\usecolortheme[named=darkgreen]{structure}
+\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\begin{document}
+\title{Software Testing the Numpy Linear Algebra Library}  
+\author{Group 7}
+
+\date{\today} 
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}\frametitle{Table of contents}\tableofcontents
+\end{frame} 
+
+\section{Library Choice}
+\begin{frame}
+\frametitle{Library Choice} 
+\begin{itemize}
+\item sufficiently large\\
+\item Contains at least one "complicated" function\\
+\item Reasonable inputs \\
+\end{itemize}
+\end{frame}
+
+%\begin{frame}\frametitle{Table of contents}\tableofcontents
+%\end{frame}
+\begin{frame}\frametitle{Considered Libraries} 
+\begin{itemize}
+\item (Suraj's ascii library) - Complicated input 
+\item Numpy sorting - Too small (?)
+\item Numpy Linalg 
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}\frametitle{Numpy Linear Algebra Library} 
+\begin{itemize}
+
+\item functions for matrix or vector operations 
+\item 30(?) functions
+\item take matrix/vector inputs 
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}\frametitle{Black Box testing} 
+
+\begin{itemize}
+\item Plan to test all(?) functions
+\item standard inputs
+\item edge cases
+
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}\frametitle{White-Box testing} 
+\begin{itemize}
+\item Test for edge coverage using (?)
+\item Still need to choose which function
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+Any Questions?
+\end{frame}
+
+\end{document}
