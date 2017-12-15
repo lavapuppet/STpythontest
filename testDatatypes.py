@@ -19,6 +19,7 @@ from numpy.testing import (
 
 import unittest
 
+
 # GLOBAL FUNCTIONS
 def get_real_dtype(dtype):
     return {single: single, double: double,
@@ -27,18 +28,13 @@ def get_real_dtype(dtype):
 
 class LinalgCase(object):
     def __init__(self, name, a, b, tags=set()):
-        """
-        A bundle of arguments to be passed to a test case, with an identifying
-        name, the operands a and b, and a set of tags to filter the tests
-        aaaaaaTest
-        """
+
+
         assert_(isinstance(name, str))
         self.name = name
         self.a = a
         self.b = b
-        self.tags = frozenset(tags)  # prevent shared tags
-
-
+        self.datatype = frozenset(tags)  # prevent shared tags
 
 
 CASES = []
@@ -50,7 +46,6 @@ CASES += [LinalgCase("single",
                      array([[1., 2.], [3., 4.]], dtype=double),
                      array([2., 1.], dtype=double)),
           ]
-
 
 
 class TestDatatypes(unittest.TestCase):
