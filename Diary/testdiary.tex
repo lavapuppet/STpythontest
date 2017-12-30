@@ -197,38 +197,42 @@ Norm of the matrix or vector(s).\\
 \subsubsection{tests}
 \subsection{linalg.cond}
 \subsubsection{documentation}
-
-
 \subsubsection{tests}
-\subsection{linalg.det}
-\subsubsection{documentation}
 
-\subsubsection{tests}
+
 \subsection{linalg.matrix\_rank}
 \subsubsection{documentation}
-
 \subsubsection{tests}
-\subsection{linalg.slogdet}    
-\subsubsection{documentation}
 
-\subsubsection{tests}
+
 \subsection{linalg.trace}
 \subsubsection{documentation}
-
 \subsubsection{tests}
-\subsection{linalg.det}
+
+\subsection{linalg.det, linalg.slogdet.}
 \subsubsection{documentation}
+Determinants are used to define the characteristic polynomial of a matrix and whether it has a unique solution or not. This function computes the sign and (natural) logarithm of the determinant of an array. A number representing the sign of the determinant. For a real matrix,
+this is 1, 0, or -1. For a complex matrix, this is a complex number with absolute value 1 (i.e., it is on the unit circle), or else 0. The determinant is computed via LU factorization using the LAPACK
+routine z/dgetrf. The determinant of a 2-D array ``[[a, b], [c, d]]`` is ``ad - bc``. (sign, logdet) = np.linalg.slogdet(a)
 
 \subsubsection{tests}
+test\_det: This tests that the determinant calculation works according to the above. \\
+\\
+test\_size\_zero: This tests that the sign of the determinant an empty matrix is a complex number and that the determinant itself is 1. \\
+\\
+test\_types: This tests that the output type of the determinant is the same as the input type, i.e. single, double, csingle and cdouble. 
 
 \subsection{linalg.multidot (Black box tests)}
+sdfs
 \subsubsection{documentation}
 Compute the dot product of two or more arrays in a single function call, while automatically selecting the fastest evaluation order. `multi\_dot` chains `numpy.dot` and uses optimal parenthesization of the matrices. Depending on the shapes of the matrices, this can speed up the multiplication a lot. If the first argument is 1-D it is treated as a row vector. If the last argument is 1-D it is treated as a column vector. The other arguments must be 2-D.\\
 \\
 TestCases: Test cases are created so that vectors when multiplied share the same dimensions. When matrices are multiplied they need to be organized so that the first dimension of the first matrix is the same as the second dimension of the second matrix etc. 
-\subsubsection{tests}
+\subsubsection{Tests}
 test\_three\_inputs\_vectors: This tests the multidot function with three vectors. The assert is the following: assert\_almost\_equal(multi\_dot([A, B]), A.dot(B))\\
+\\
 test\_three\_inputs\_matrices: This tests the multidot function with three matrices\\
+\\
 test\_four\_inputs\_matrices: This tests the multidot function with four matrices\\
 \\
 test\_shape\_vector\_first: This tests the multidot function with a vector with n rows as the first argument followed by three matrices with dimensions n, m and m, n. The shape result sought is the same as the vector, i.e. 1 dimensional with n rows. \\
@@ -236,7 +240,8 @@ test\_shape\_vector\_first: This tests the multidot function with a vector with 
 test\_shape\_vector\_last: This tests the multidot function with a n rows vector as the last argument preceded by three matrices with dimensions m, n and n, m. The shape result sought is m. \\
 \\
 test\_shape\_vector\_first\_and\_last: This tests the multidot function with n rows vector as the first and last arguments with two matrices with dimensions n, m and m, n in the middle. The shape result sought is () since the result is a scalar. assert\_equal(multi\_dot([A1d, B, C, D1d]).shape, ())\\
-
+\\
+test\_types: This runs the test\_three\_inputs\_matrices above using integers, doubles, complex numbers. 
 
 
 \section{White-Box Test}

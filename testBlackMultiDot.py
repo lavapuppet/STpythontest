@@ -56,47 +56,72 @@ import unittest
     #################################################################################################
 
 
-# GLOBAL FUNCTIONS
-def get_real_dtype(dtype):
-    return {single: single, double: double,
-            csingle: single, cdouble: double}[dtype]
-
-
-
 
 CASES = []
 
 dimension1 = np.random.randint(1, 12)
 dimension2 = np.random.randint(1, 12)
 
-CASES += [np.random.random((dimension1, dimension2)),
+CASES += [np.random.random((dimension1, dimension2)), # 0
                 np.random.random((dimension2, dimension1)),
-                np.random.random((dimension1, dimension2))]
+                np.random.random((dimension1, dimension2)),
+                np.random.random((dimension2, dimension1)),
+                np.random.random(dimension1),
+                np.random.random(dimension1), # 5
+                np.random.random(dimension1)]
 
 
 class TestMultiDot(unittest.TestCase):
 
-    def test_basic_function_with_three_arguments(self):
-        # multi_dot with three arguments uses a fast hand coded algorithm to
-        # determine the optimal order. Therefore test it separately.
+    def test_two_inputs_vectors(self):
+        A = CASES[4]
+        B = CASES[5]
 
+        assert_almost_equal(multi_dot([A, B]), A.dot(B))
+        assert_almost_equal(multi_dot([A, B]), np.dot(A, B))
+
+
+    def test_three_inputs_vectors(self):
+
+        A = CASES[4]
+        B = CASES[5]
+        C = CASES[2]
+
+        # running multi-dot on three equal size vectors should result in a multi_dot error
+        try:
+            assert_almost_equal(multi_dot([A, B, C]), np.dot(np.dot(A, B), C))
+        except Exception:
+            pass
+
+
+    def test_three_inputs_matrices(self):
         A = CASES[0]
         B = CASES[1]
         C = CASES[2]
 
-
-
         assert_almost_equal(multi_dot([A, B, C]), A.dot(B).dot(C))
         assert_almost_equal(multi_dot([A, B, C]), np.dot(A, np.dot(B, C)))
 
-    def test_basic_function_with_dynamic_programing_optimization(self):
-        # multi_dot with four or more arguments uses the dynamic programing
-        # optimization and therefore deserve a separate
-        A = np.random.random((6, 2))
-        B = np.random.random((2, 6))
-        C = np.random.random((6, 2))
-        D = np.random.random((2, 1))
+        #when the inputs are in the wrong order
+        try:
+            assert_almost_equal(multi_dot([A, C, B]), np.dot(np.dot(A, C), C))
+        except Exception:
+            pass
+
+
+    def test_four_inputs_matrices(self):
+        A = CASES[0]
+        B = CASES[1]
+        C = CASES[2]
+        D = CASES[3]
+
         assert_almost_equal(multi_dot([A, B, C, D]), A.dot(B).dot(C).dot(D))
+
+        # when the inputs are in the wrong order
+        try:
+            assert_almost_equal(multi_dot([A, C, B]), np.dot(np.dot(A, C), C))
+        except Exception:
+            pass
 
     def test_vector_as_first_argument(self):
         # The first argument can be 1-D
@@ -127,6 +152,7 @@ class TestMultiDot(unittest.TestCase):
 
         # the result should be a scalar
         assert_equal(multi_dot([A1d, B, C, D1d]).shape, ())
+
 
 
 
