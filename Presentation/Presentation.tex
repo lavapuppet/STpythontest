@@ -34,7 +34,8 @@
 \begin{itemize}
 \item Reinforcement Learning Library - Complicated input 
 \item Numpy sorting - Too small (?)
-\item Numpy Linalg 
+\item Numpy logical - no "complicated" functions 
+\item Numpy Linalg
 \end{itemize}
 \end{frame}
 
@@ -43,8 +44,8 @@
 \begin{itemize}
 
 \item functions for matrix or vector operations 
-\item 30(?) functions
-\item take matrix/vector inputs 
+\item 30 functions
+\item take matrix/vector inputs
 \end{itemize}
 \end{frame}
 
@@ -63,12 +64,17 @@ Goal:Derive a set of input cases that fully exercise the external functionality\
 \end{itemize}
 \end{frame}
 
+\begin{frame}\frametitle{Numpy Documentation} 
+	See Numpy Documentation of the Linear Algebra library.
+\end{frame}
+
+
 \begin{frame}\frametitle{Black Box Testing} 
-Plan to test all(?) functions in this way\\
+Plan to black-box test as many functions as possible\\
 Test to see if the inputs/outputs match what is given in the documentation
 \begin{itemize}
 \item Standard inputs
-\item edge cases
+\item Edge cases
 \item Exceptions 
 \end{itemize}
 \end{frame}
@@ -97,6 +103,7 @@ Since it is not possible to multiply to matrices if their last dimension are not
 \end{frame}
 
 
+\section{White-Box}
 \begin{frame}\frametitle{White-Box testing} 
 \begin{itemize}
 \item Test for edge coverage using Coverage.py
@@ -106,21 +113,17 @@ Since it is not possible to multiply to matrices if their last dimension are not
 \end{itemize}
 \end{frame}
 
-\begin{frame}
-Any Questions?
-\end{frame}
-
-\begin{frame}
+\begin{frame}\frametitle{Numpy's Tests}
 \begin{itemize}
-\item numpy’s own tests
-\\ Test functions for linalg module”, 1700 rows. 
-\\ class LinalgCase(object):
-\\ don’t test raw data, they first build test objects containing 4 objects. 
-\\ self.name; self.a; self.b; self.tags  
+	\item Numpy’s own tests
+	\\ Test functions for linalg module”, 1700 rows. 
+	\\ class LinalgCase(object):
+	\\ don’t test raw data, they first build test objects containing 4 objects. 
+	\\ self.name; self.a; self.b; self.tags  
 \end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}\frametitle{Numpy's Tests}
 \begin{itemize}
 \item 3 main types of cases (tags): square or non-square, Hermitian
 \item square:
@@ -132,25 +135,28 @@ Any Questions?
 \end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}\frametitle{Numpy's Tests}
 \begin{itemize}
 \item non-square: 
-\\ CASES += LinalgCase("single$_nsq_$1", array([[1., 2., 3.], [3., 4., 6.]], dtype=single),array([2., 1.], dtype=single)),
+\\ CASES += LinalgCase("single\_nsq\_1", array([[1., 2., 3.], [3., 4., 6.]], dtype=single),array([2., 1.], dtype=single)),
 \item Hermitian: 
 \\CASES += LinalgCase("hsingle", array([[1., 2.], [2., 1.]], dtype=single), None),
 \item Combine the 3 above types into generic object
-\\def $_make_generalized_cases():$
+\\def \_make\_generalized\_cases():
 \item Get all combination of all cases – Cartesian product. 
-\\def $_make_strided_cases(): #stride combination$ 
+\\def \_make\_strided\_cases(): #stride combination 
 \item Now the testing part starts:
 \item class LinalgSquareTestCase(object):
-\\def $test_sq_cases(self):$
-\end{itemize}
+\\def test\_sq\_cases(self):
+	\end{itemize}
 \end{frame}
 
 
 
 
+\begin{frame}
+Any Questions?
 \end{frame}
+
 
 \end{document}

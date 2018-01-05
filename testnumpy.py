@@ -21,8 +21,12 @@ class TestLinAlg(unittest.TestCase):
         """ Square Test [1]"""
 
         """ Perpendicular Test [1]"""
-        self.array_per_1 = [2.0 , 1.0, 4.0]
-        self.array_per_2 = [1.0 , -1.0, -0.25]
+        self.array_per_1com = [2.0 , 1.0, 4.0]
+        self.array_per_2com = [1.0 , -1.0, -0.25]
+
+        """ Complex nubmers 
+        self.array_per_1 = [2 +4j , 1+3j, 4.0]
+        self.array_per_2 = [1.0+4j, -1.0+3j, -0.25] """
 
     """
         Testing numpy.linalg.dot() function
@@ -31,12 +35,15 @@ class TestLinAlg(unittest.TestCase):
     def test_dot_raises(self):
         with self.assertRaises(ValueError):
             actual = np.dot([2, 2, 3], [2, 1])
-        
-#        try:
- #           self.assertFalse(True)
-  #      except ValueError:
-   #         pass
-        
+
+    def test_dot_corner(self):
+        actual = np.dot([], [])
+        expected = False
+        self.assertEqual(actual, expected);
+
+    def test_dot_corner2(self):
+        with self.assertRaises(ValueError):
+            actual = np.dot([], [1, 2])
     
     def test_dot_iden(self):
         actual = np.dot(self.array_1, self.array_2)
@@ -62,7 +69,7 @@ class TestLinAlg(unittest.TestCase):
         actual = np.dot(self.array_per_1, self.array_per_2)
         expected = 0
         self.assertTrue((actual == expected).all())
-
+        
     """
         Testing numpy.linalg.vdot() function
     """
@@ -73,8 +80,10 @@ class TestLinAlg(unittest.TestCase):
         self.assertTrue((actual == expected).all())
 
     
-    
-        
+
+    """
+        Tes
+    """
 
 if __name__ == '__main__':
     unittest.main()
