@@ -236,7 +236,7 @@ threshold below which SVD values are considered zero. If `tol` is None, and ``S`
 enabling a more efficient method for finding singular values. Defaults to False.
 \paragraph{Returns}: 
 \subsubsection{tests}
-test\_rank:  
+test\_simple\_case: a simple 3X3 eye matrix is tested 
 
 
 \subsection{linalg.det, linalg.slogdet}
@@ -273,11 +273,12 @@ test\_shape\_vector\_last: This tests the multidot function with a n rows vector
 \\
 test\_shape\_vector\_first\_and\_last: This tests the multidot function with n rows vector as the first and last arguments with two matrices with dimensions n, m and m, n in the middle. The shape result sought is () since the result is a scalar. assert\_equal(multi\_dot([A1d, B, C, D1d]).shape, ())\\
 \\
-test\_types: This runs the test\_three\_inputs\_matrices above using integers, doubles, complex numbers. 
-
+test\_types: This runs the test\_three\_inputs\_matrices above using integers, doubles, complex numbers. \\
+\\
+These tests were written to test the functionality of multidot with various inputs. All test cases are initialized with random values. 
 
 \section{White-Box Test}
-
+\input{wbtex.tex}
 \input{usefullatex.tex}
 
 \section{Appendix}
@@ -524,7 +525,7 @@ test\_types: This runs the test\_three\_inputs\_matrices above using integers, d
 \subsection{test\_multi\_dot}	
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.6\textwidth]{snippets/multi_dot/1CASES.png}
+	\includegraphics[width=0.6\textwidth]{snippets/multi_dot/1CASES.PNG}
 	\includegraphics[width=0.6\textwidth]{snippets/multi_dot/2.png}
 	\includegraphics[width=0.6\textwidth]{snippets/multi_dot/3.png}
 	\includegraphics[width=0.5\textwidth]{snippets/multi_dot/4.png}

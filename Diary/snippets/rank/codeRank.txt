@@ -1,0 +1,21 @@
+
+class TestMatrixRank(Unittest.TestCase):
+
+    def test_simple_case(self):
+        # the rank of a 3X3 matrix is 3
+        assert_equal(linalg.matrix_rank(np.eye(3)), 3)
+
+    def test_scalar(self):
+        assert_equal(matrix_rank(1), 1)
+
+    def test_array(self):
+        # the rank of an array with a single value should be one
+        assert_equal(matrix_rank([1]), 1)
+
+    def test_zero_rank(self):
+        assert_equal(linalg.matrix_rank(np.zeros((4, 4))), 0)
+
+    def test_1_dimensional_matrix(self):
+        assert_equal(matrix_rank([1, 0, 0, 0]), 1)
+		
+		
