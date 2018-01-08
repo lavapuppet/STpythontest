@@ -48,16 +48,17 @@ stringstyle=\color{red}\ttfamily,
 \subsubsection{documentation}
 For 2-D arrays it is equivalent to matrix multiplication, and for 1-D arrays to inner product of vectors (without complex conjugation). For N dimensions it is a sum product over the last axis of a and the second-to-last of b:
 
-    dot(a, b)[i,j,k,m] = sum(a[i,j,:] * b[k,:,m])
-   \paragraph{Paramaters}: two arrays a: array\_like First argument.\\
-b : array\_like Second argument.\\
-out : ndarray, optional output argument. This must have the exact kind that would be returned if it was not used. In particular, it must have the right type, must be C-contiguous, and its dtype must be the dtype that would be returned for dot(a,b). This is a performance feature. Therefore, if these conditions are not met, an exception is raised, instead of attempting to be flexible.
-    \paragraph{Returns}:    output : ndarray\\
-Returns the dot product of a and b. If a and b are both scalars or both 1-D arrays then a scalar is returned; otherwise an array is returned. If out is given, then it is returned.
-Raises: 
-ValueError
-If the last dimension of a is not the same size as the second-to-last dimension of b.
+    \begin{equation} dot(a, b)[i,j,k,m] = sum(a[i,j,:] * b[k,:,m]) \end{equation}
+    
+   \paragraph{Paramaters}: \textbf{a} : \textit{array\_like} First argument.\\
+	\indent \hspace{2.2cm} \textbf{b} : \textit{array\_like} Second argument.\\
+\indent \hspace{2.2cm} \textbf{out} : \textit{ndarray, optional} Output argument. This must have the exact kind that would be returned if it was not used. In particular, it must have the right type, must be C-contiguous, and its dtype must be the dtype that would be returned for dot(a,b). This is a performance feature. Therefore, if these conditions are not met, an exception is raised, instead of attempting to be flexible.
+    \paragraph{Returns}:    \textbf{output} : \textit{ndarray}
+Returns the dot product of a and b. If a and b are both scalars or both 1-D arrays then a scalar is returned; otherwise an array is returned. If out is given, then it is returned.\\
 
+\paragraph{Raises}:
+\textbf{ValueError}
+If the last dimension of a is not the same size as the second-to-last dimension of b.
 
 \subsubsection{Tests}
 In order to test this function, the input space is partitioned into three types of test suites:
@@ -75,7 +76,6 @@ In order to test this function, the input space is partitioned into three types 
 	\end{itemize}
 	
 	\item \textbf{Raises case:} This test is setup to ensure that a ValueError is raised when multiplying vectors of different dimensionality.
-
 \end{itemize}
 
 \subsection{linalg.multidot}
@@ -84,7 +84,8 @@ Compute the dot product of two or more arrays in a single function call, while a
 multi\_dot chains numpy.dot and uses optimal parenthesization of the matrices [R44] [R45]. Depending on the shapes of the matrices, this can speed up the multiplication a lot.
 
 If the first argument is 1-D it is treated as a row vector. If the last argument is 1-D it is treated as a column vector. The other arguments must be 2-D.
-\subsubsection{tests}
+
+\subsubsection{Tests}
 
 \subsection{linalg.vdot}
 
@@ -95,8 +96,17 @@ The vdot(a, b) function handles complex numbers differently than dot(a, b). If t
 
 Note that vdot handles multidimensional arrays differently than dot: it does not perform a matrix product, but flattens input arguments to 1-D vectors first. Consequently, it should only be used for vectors.
 
-\subsubsection{Tests}
+\paragraph{Paramaters}:	
+\textbf{a} : \textit{array\_like} If a is complex the complex conjugate is taken before calculation of the dot product.
 
+\indent \hspace{2.3cm}\textbf{b} : \textit{array\_like} Second argument to the dot product.
+
+\paragraph{Returns}:	
+\indent \hspace{0.1cm}\textbf{output} : \textit{ndarray} Dot product of a and b. Can be an int, float, or complex depending on the types of a and b.
+
+
+
+\subsubsection{Tests}
 
 For the \textit{vdot} function the input space is partitioned into tests that are formed based on the following division:
 
@@ -111,10 +121,15 @@ For the \textit{vdot} function the input space is partitioned into tests that ar
 
 \subsection{linalg.inner}
 \subsubsection{documentation}
-Inner product of two arrays.
+Inner product of two arrays. Ordinary inner product of vectors for 1-D arrays (without complex conjugation), in higher dimensions a sum product over the last axes.
 
-Ordinary inner product of vectors for 1-D arrays (without complex conjugation), in higher dimensions a sum product over the last axes.
+\paragraph{Paramaters}:
+\textbf{a}, \textbf{b} : \textit{array\_like} If a and b are nonscalar, their last dimensions must match.
 
+\paragraph{Returns}: \textbf{out} : \textit{ndarray} \textit{out.shape = a.shape[:-1] + b.shape[:-1]}
+
+\paragraph{Raises}:	
+\textbf{ValueError} If the last dimension of a and b has different size.
 \subsubsection{Tests}
 In order to test the \textit{inner} product functionality the test suite is divided based on:
 
@@ -138,16 +153,15 @@ In order to test the \textit{inner} product functionality the test suite is divi
 \subsubsection{documentation}
 Compute the outer product of two vectors.
 
-\paragraph{Paramaters}: 
-a : (M,) array\_like
-First input vector. Input is flattened if not already 1-dimensional.
-b : (N,) array\_like
-Second input vector. Input is flattened if not already 1-dimensional.\\
-out : (M, N) ndarray, optional
-A location where the result is stored\\
-\paragraph{Returns}:    
-out : (M, N) ndarray
-out[i, j] = a[i] * b[j]
+\paragraph{Parameters}:	
+\textbf{a} : (M,) \textit{array\_like} First input vector. Input is flattened if not already 1-dimensional.
+
+\textbf{b} : (N,) \textit{array\_like} Second input vector. Input is flattened if not already 1-dimensional.
+
+\textbf{out} : (M, N) \textit{ndarray, optional} A location where the result is stored
+
+\paragraph{Returns}: \textbf{out} : (M, N) \textit{ndarray} \textit{out[i, j] = a[i] * b[j]}
+
 
 \subsubsection{Tests}
 
@@ -162,15 +176,22 @@ In order to test the \textit{outer} function tests have been made to check the f
 
 \subsection{linalg.matmul}
 \subsubsection{documentation}
-Matrix product of two arrays.\\
+Matrix product of two arrays.\\ The behavior depends on the arguments in the following way.\\
 
-The behavior depends on the arguments in the following way.\\
+If both arguments are 2-D they are multiplied like conventional matrices.\\ If either argument is N-D, N $ > $ 2, it is treated as a stack of matrices residing in the last two indexes and broadcast accordingly.\\ If the first argument is 1-D, it is promoted to a matrix by prepending a 1 to its dimensions. After matrix multiplication the prepended 1 is removed.\\ If the second argument is 1-D, it is promoted to a matrix by appending a 1 to its dimensions. After matrix multiplication the appended 1 is removed.\\ Multiplication by a scalar is not allowed, use * instead. Note that multiplying a stack of matrices with a vector will result in a stack of vectors, but matmul will not recognize it as such.\\
 
-If both arguments are 2-D they are multiplied like conventional matrices.\\
-If either argument is N-D, N > 2, it is treated as a stack of matrices residing in the last two indexes and broadcast accordingly.\\
-If the first argument is 1-D, it is promoted to a matrix by prepending a 1 to its dimensions. After matrix multiplication the prepended 1 is removed.\\
-If the second argument is 1-D, it is promoted to a matrix by appending a 1 to its dimensions. After matrix multiplication the appended 1 is removed.\\
-Multiplication by a scalar is not allowed, use * instead. Note that multiplying a stack of matrices with a vector will result in a stack of vectors, but matmul will not recognize it as such.\\
+
+\paragraph{Parameters}:	
+\textbf{a} : \textit{array\_like} First argument.
+
+\textbf{b} : \textit{array\_like} Second argument.
+
+\textbf{out} : \textit{ndarray, optional} Output argument. This must have the exact kind that would be returned if it was not used. In particular, it must have the right type, must be C-contiguous, and its dtype must be the dtype that would be returned for dot(a,b). This is a performance feature. Therefore, if these conditions are not met, an exception is raised, instead of attempting to be flexible.
+
+\paragraph{Returns}:	
+\textbf{output} : \textit{ndarray} Returns the dot product of a and b. If a and b are both 1-D arrays then a scalar is returned; otherwise an array is returned. If out is given, then it is returned.
+
+\paragraph{Raises}:	\textbf{ValueError} If the last dimension of a is not the same size as the second-to-last dimension of b. If scalar value is passed.
 
 \subsubsection{Tests}
 In order to test the \textit{matmul} function tests have been made to check the following:
@@ -184,9 +205,17 @@ In order to test the \textit{matmul} function tests have been made to check the 
 
 \subsection{linalg.matrix\_power}
 \subsubsection{documentation}
-Raise a square matrix to the (integer) power n.\\
+Raise a square matrix to the (integer) power n.\\ For positive integers n, the power is computed by repeated matrix squarings and matrix multiplications. If n == 0, the identity matrix of the same shape as M is returned. If n < 0, the inverse is computed and then raised to the abs(n).
 
-For positive integers n, the power is computed by repeated matrix squarings and matrix multiplications. If n == 0, the identity matrix of the same shape as M is returned. If n < 0, the inverse is computed and then raised to the abs(n).
+
+\paragraph{Parameters}: \textbf{M} : \textit{ndarray or matrix object} Matrix to be “powered.” Must be square, i.e. M.shape == (m, m), with m a positive integer.
+
+\textbf{n} : \textit{int} The exponent can be any integer or long integer, positive, negative, or zero.
+
+\paragraph{Returns}: \textbf{M**n} : \textit{ndarray or matrix object} The return value is the same shape and type as M; if the exponent is positive or zero then the type of the elements is the same as those of M. If the exponent is negative the elements are floating-point.
+
+\paragraph{Raises}:	\textbf{LinAlgError} If the matrix is not numerically invertible.
+
 \subsubsection{Tests}
 In order to test the \textit{matrix power} function tests have been made to check the following:
 
