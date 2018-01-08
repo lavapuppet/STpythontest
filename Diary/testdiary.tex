@@ -236,7 +236,17 @@ threshold below which SVD values are considered zero. If `tol` is None, and ``S`
 enabling a more efficient method for finding singular values. Defaults to False.
 \paragraph{Returns}: 
 \subsubsection{tests}
-test\_simple\_case: a simple 3X3 eye matrix is tested 
+test\_simple\_case: a simple 3X3 eye matrix is tested \\
+\\
+test\_scalar: the rank of a scalar input equates to 1. \\
+\\
+test\_array: same as above but a scalar inside an array. \\
+\\
+test\_zero\_rank: the rank of a matrix with zeros will equate to 0. \\
+\\
+test\_1\_dimensional\_matrix: the rank of a 1 dimensinal matrix should be 1. \\
+\\
+These tests were written to test the functionality of matrix rank with various simple inputs. 
 
 
 \subsection{linalg.det, linalg.slogdet}
@@ -251,7 +261,9 @@ test\_det: This tests that the determinant calculation works according to the ab
 \\
 test\_size\_zero: This tests that the sign of the determinant an empty matrix is a complex number and that the determinant itself is 1. \\
 \\
-test\_types: This tests that the output type of the determinant is the same as the input type, i.e. single, double, csingle and cdouble. 
+test\_types: This tests that the output type of the determinant is the same as the input type, i.e. single, double, csingle and cdouble. \\
+\\
+These tests were written to test matrix determinants with various simple inputs. 
 
 \subsection{linalg.multidot (Black box tests)}
 \subsubsection{documentation}
