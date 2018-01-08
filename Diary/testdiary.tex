@@ -236,7 +236,17 @@ threshold below which SVD values are considered zero. If `tol` is None, and ``S`
 enabling a more efficient method for finding singular values. Defaults to False.
 \paragraph{Returns}: 
 \subsubsection{tests}
-test\_simple\_case: a simple 3X3 eye matrix is tested 
+test\_simple\_case: a simple 3X3 eye matrix is tested \\
+\\
+test\_scalar: the rank of a scalar input equates to 1. \\
+\\
+test\_array: same as above but a scalar inside an array. \\
+\\
+test\_zero\_rank: the rank of a matrix with zeros will equate to 0. \\
+\\
+test\_1\_dimensional\_matrix: the rank of a 1 dimensinal matrix should be 1. \\
+\\
+These tests were written to test the functionality of matrix rank with various simple integer inputs. 
 
 
 \subsection{linalg.det, linalg.slogdet}
@@ -251,7 +261,9 @@ test\_det: This tests that the determinant calculation works according to the ab
 \\
 test\_size\_zero: This tests that the sign of the determinant an empty matrix is a complex number and that the determinant itself is 1. \\
 \\
-test\_types: This tests that the output type of the determinant is the same as the input type, i.e. single, double, csingle and cdouble. 
+test\_types: This tests that the output type of the determinant is the same as the input type, i.e. single, double, csingle and cdouble. \\
+\\
+These tests were written to test matrix determinants with various simple inputs. The determinant function was also evaluated with double, complex single and complex double datatypes. 
 
 \subsection{linalg.multidot (Black box tests)}
 \subsubsection{documentation}
@@ -276,6 +288,11 @@ test\_shape\_vector\_first\_and\_last: This tests the multidot function with n r
 test\_types: This runs the test\_three\_inputs\_matrices above using integers, doubles, complex numbers. \\
 \\
 These tests were written to test the functionality of multidot with various inputs. All test cases are initialized with random values. 
+
+\subsection{Datatype tests}
+A separate testclass was created to test linalg functions with various datatypes. The functions were run with values of these datatypes and the output was checked to still be the same datatype. The datatypes used were single, double, complex single and complex double. The functions tested with the datatypes were matrix invariant, eig and eigenvalues for normal and hermitian cases, single value decomposition and determinant.  
+
+
 
 \section{White-Box Test}
 \input{wbtex.tex}
@@ -526,30 +543,30 @@ These tests were written to test the functionality of multidot with various inpu
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.6\textwidth]{snippets/multi_dot/1CASES.PNG}
-	\includegraphics[width=0.6\textwidth]{snippets/multi_dot/2.png}
-	\includegraphics[width=0.6\textwidth]{snippets/multi_dot/3.png}
-	\includegraphics[width=0.5\textwidth]{snippets/multi_dot/4.png}
+	\includegraphics[width=0.6\textwidth]{snippets/multi_dot/2.PNG}
+	\includegraphics[width=0.6\textwidth]{snippets/multi_dot/3.PNG}
+	\includegraphics[width=0.5\textwidth]{snippets/multi_dot/4.PNG}
 
 \end{figure}
 
 \subsection{test\_matrix\_rank}	
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.70\textwidth]{snippets/rank/1.png}
+	\includegraphics[width=0.70\textwidth]{snippets/rank/1.PNG}
 \end{figure}
 
 \subsection{test\_matrix\_determinant}	
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.70\textwidth]{snippets/Det/1.png}
+	\includegraphics[width=0.70\textwidth]{snippets/Det/1.PNG}
 \end{figure}
 
 \subsection{test\_datatypes}	
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.70\textwidth]{snippets/datatypes/2.png}
-	\includegraphics[width=0.70\textwidth]{snippets/datatypes/3.png}
-	\includegraphics[width=0.70\textwidth]{snippets/datatypes/4.png}
+	\includegraphics[width=0.70\textwidth]{snippets/datatypes/2.PNG}
+	\includegraphics[width=0.70\textwidth]{snippets/datatypes/3.PNG}
+	\includegraphics[width=0.70\textwidth]{snippets/datatypes/4.PNG}
 \end{figure}
 
 \newpage	
