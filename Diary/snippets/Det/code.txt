@@ -1,0 +1,60 @@
+class TestDet(LinalgSquareTestCase, LinalgGeneralizedSquareTestCase):
+
+    def do(self, a, b, tags):
+        d = linalg.det(a)
+        (s, ld) = linalg.slogdet(a)
+        if asarray(a).dtype.type in (single, double):
+            ad = asarray(a).astype(double)
+        else:
+            ad = asarray(a).astype(cdouble)
+        ev = linalg.eigvals(ad)
+        assert_almost_equal(d, multiply.reduce(ev, axis=-1))
+        assert_almost_equal(s * np.exp(ld), multiply.reduce(ev, axis=-1))
+
+        s = np.atleast_1d(s)
+        ld = np.atleast_1d(ld)
+        m = (s != 0)
+        assert_almost_equal(np.abs(s[m]), 1)
+        assert_equal(ld[~m], -inf)
+
+    def test_zero(self):
+        assert_equal(linalg.det([[0.0]]), 0.0)
+        assert_equal(type(linalg.det([[0.0]])), double)
+        assert_equal(linalg.det([[0.0j]]), 0.0)
+        assert_equal(type(linalg.det([[0.0j]])), cdouble)
+
+        assert_equal(linalg.slogdet([[0.0]]), (0.0, -inf))
+        assert_equal(type(linalg.slogdet([[0.0]])[0]), double)
+        assert_equal(type(linalg.slogdet([[0.0]])[1]), double)
+        assert_equal(linalg.slogdet([[0.0j]]), (0.0j, -inf))
+        assert_equal(type(linalg.slogdet([[0.0j]])[0]), cdouble)
+        assert_equal(type(linalg.slogdet([[0.0j]])[1]), double)
+
+    def test_types(self):
+        def check(dtype):
+            x = np.array([[1, 0.5], [0.5, 1]], dtype=dtype)
+            assert_equal(np.linalg.det(x).dtype, dtype)
+            ph, s = np.linalg.slogdet(x)
+            assert_equal(s.dtype, get_real_dtype(dtype))
+            assert_equal(ph.dtype, dtype)
+        for dtype in [single, double, csingle, cdouble]:
+            yield check, dtype
+
+    def test_0_size(self):
+        a = np.zeros((0, 0), dtype=np.complex64)
+        res = linalg.det(a)
+        assert_equal(res, 1.)
+        assert_(res.dtype.type is np.complex64)
+        res = linalg.slogdet(a)
+        assert_equal(res, (1, 0))
+        assert_(res[0].dtype.type is np.complex64)
+        assert_(res[1].dtype.type is np.float32)
+
+        a = np.zeros((0, 0), dtype=np.float64)
+        res = linalg.det(a)
+        assert_equal(res, 1.)
+        assert_(res.dtype.type is np.float64)
+        res = linalg.slogdet(a)
+        assert_equal(res, (1, 0))
+        assert_(res[0].dtype.type is np.float64)
+        assert_(res[1].dtype.type is np.float64)
