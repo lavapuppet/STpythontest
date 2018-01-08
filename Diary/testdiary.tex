@@ -30,6 +30,34 @@
 	
 \section{Appendix}
 \subsection{linalg.dot}
+\begin{algorithm}[H]
+	\textbf{class} numpy \textbf{as} np
+\\	\textbf{import} unittest
+\\
+\\ \textbf{class} TestLinAlg(unittest.TestCase):
+\\
+\\$ ~~~~~~~~ $\textbf{def} setUp(self):	
+\\ $ ~~~~~~~~ $''\url{http://gettingsharper.de/2011/11/30/vector-fun-dot-product/}" 
+\\
+\\ $ ~~~~~~~~ $\textit{Basic Identity Test / Square Test}
+\\ $ ~~~~~~~~ $self.array\_1 = [[1, 0], [0, 1]]
+\\ $ ~~~~~~~~ $self.array\_2 = [[4, 1], [2, 2]]
+\\ $ ~~~~~~~~ $
+\\ $ ~~~~~~~~ $\textit{Zero Test}
+\\ $ ~~~~~~~~ $self.array\_zero = [0, 0]
+\\ $ ~~~~~~~~ $
+\\ $ ~~~~~~~~ $\textit{Commutative Test}
+\\ $ ~~~~~~~~ $self.array\_com\_1 = [-3.22 , 2.25, -0.13]
+\\ $ ~~~~~~~~ $self.array\_com\_2 = [0.0 , -6.7, 10.0]   
+\\ $ ~~~~~~~~ $
+\\ $ ~~~~~~~~ $\textit{Linear Test}
+\\ $ ~~~~~~~~ $self.array\_com\_3 = [12.4, -1.7, 3.15]
+\\ $ ~~~~~~~~ $self.scalar = 0.22
+\\ $ ~~~~~~~~ $
+\\ $ ~~~~~~~~ $\textit{Perpendicular Test}
+\\ $ ~~~~~~~~ $self.array\_per\_1 = [2.0 , 1.0, 4.0]
+\\ $ ~~~~~~~~ $self.array\_per\_2 = [1.0 , -1.0, -0.25]
+\end{algorithm}
 
 \begin{algorithm}[H]
 	\textbf{def} test\_dot\_corner(self):
@@ -45,7 +73,7 @@
 \end{algorithm}
 
 \begin{algorithm}[H]
-	\textbf{def} test\_dot\_iden(self):
+	\textbf{def} test\_dot\_identity(self):
 	\\ $ ~~~~~~~~ $actual = np.dot(self.array\_1, self.array\_2)
 	\\ $ ~~~~~~~~ $expected = [[4, 1], [2, 2]]
 	\\ $ ~~~~~~~~ $self.assertTrue((actual == expected).all())
@@ -59,7 +87,7 @@
 \end{algorithm}
 
 \begin{algorithm}[H]
-    \textbf{def} test\_dot\_com(self):
+    \textbf{def} test\_dot\_commutative(self):
 \\ $ ~~~~~~~~ $actual = np.dot(self.array\_com\_1, self.array\_com\_2)
 \\ $ ~~~~~~~~ $expected = np.dot(self.array\_com\_2, self.array\_com\_1)
 \\ $ ~~~~~~~~ $self.assertTrue((actual == expected).all())
@@ -73,12 +101,36 @@
 \end{algorithm}
 
 \begin{algorithm}[H]
+	
+	\textbf{def} test\_dot\_perpendicuar(self):
+	\\ $ ~~~~~~~~ $	actual = np.dot(self.array\_per\_1, self.array\_per\_2)
+	\\ $ ~~~~~~~~ $	expected = 0
+	\\ $ ~~~~~~~~ $	self.assertTrue((actual == expected).all())
+\end{algorithm}
+
+
+\begin{algorithm}[H]
     \textbf{def} test\_dot\_raises(self):
 \\ $ ~~~~~~~~ $with self.assertRaises(ValueError):
 \\ $ ~ ~~~~~~~~ ~~~~~~~ $actual = np.dot([2, 2, 3], [2, 1])
 \end{algorithm}
 
 \subsection{linalg.vdot}
+\begin{algorithm}[H]
+\textbf{class} TestLinAlg(unittest.TestCase):
+\\ $ ~~~~~~~~ $\textbf{def} setUp(self):
+\\ $ ~~~~~~~~~~~~~~~~ $self.array\_a = np.array([[1, 4], [5, 6]])
+\\ $ ~~~~~~~~~~~~~~~~ $self.array\_b = np.array([[4, 1], [2, 2]])
+\\
+\\ $ ~~~~~~~~~~~~~~~~ $self.array\_a\_float = np.array([1.0, 4.5])
+\\ $ ~~~~~~~~~~~~~~~~ $self.array\_b\_float = np.array([3.0, 2.5])
+\\
+\\ $ ~~~~~~~~ $\textbf{def} setupForComplex(self):
+\\ $ ~~~~~~~~~~~~~~~~ $self.complex\_a = np.array([1+2j,3+4j])   
+\\ $ ~~~~~~~~~~~~~~~~ $self.complex\_b = np.array([5+6j,7+8j])
+\\ $ ~~~~~~~~~~~~~~~~ $self.complex\_c = np.array([-5-6j,-7-8j])
+\end{algorithm}
+
 
 \begin{algorithm}[H]
 	\textbf{def} test\_vdot\_square(self):
@@ -88,10 +140,13 @@
 \end{algorithm}
 
 \begin{algorithm}[H]
-    \textbf{def} test\_vdot\_matrix(self):
-\\ $ ~~~~~~~~ $actual = np.vdot(self.array\_a, self.array\_a)
-\\ $ ~~~~~~~~ $expected = 78
-\\ $ ~~~~~~~~ $self.assertTrue(actual == expected)
+	\textbf{def} test\_vdot\_complexSquare(self):
+	\\ $ ~~~~~~~~ $self.setupForComplex()
+	\\
+	\\ $ ~~~~~~~~ $actual = np.vdot(self.complex\_a, self.complex\_a)
+	\\ $ ~~~~~~~~ $expected = 30+0j
+	\\
+	\\ $ ~~~~~~~~ $self.assertTrue(actual == expected)
 \end{algorithm}
 
 \begin{algorithm}[H]
@@ -129,6 +184,81 @@
     \textbf{def} test\_vdot\_empty(self):
 \\ $ ~~~~~~~~ $actual = np.vdot([ ],[ ])
 \\ $ ~~~~~~~~ $self.assertFalse(actual)
+\end{algorithm}
+
+\subsection{linalg.inner}
+
+\begin{algorithm}[H]
+    \textbf{def} setUp(self):
+\\
+\\ $ ~~~~~~~~ $self.array\_a = np.array([1, 2, 3])
+\\ $ ~~~~~~~~ $self.array\_b = np.array([0, 1, 0])
+\\
+\\ $ ~~~~~~~~ $self.array\_a\_float = np.array([1.0, 2.0, 4.5])
+\\ $ ~~~~~~~~ $self.array\_b\_float = np.array([3.0, 3.5, 2.5])
+\\
+\\ $ ~~~~~~~~ $\textit{Inner Product Wolfram} \\$ ~~~~~~~~ $\url{http://mathworld.wolfram.com/InnerProduct.html}
+\\ $ ~~~~~~~~ $self.vector\_u = np.array([1,2,3])
+\\ $ ~~~~~~~~ $self.vector\_v = np.array([1,2,1])
+\\ $ ~~~~~~~~ $self.vector\_w = np.array([4,5,6])
+\\ $ ~~~~~~~~ $self.scalar = 5
+\\ $ ~~~~~~~~ $self.vector\_zero = np.array([0, 0, 0])
+\end{algorithm}
+
+
+\begin{algorithm}[H]
+	\textbf{def} test\_inner\_simple(self):
+\\ $ ~~~~~~~~ $	actual = np.inner(self.array\_a, self.array\_b)
+\\ $ ~~~~~~~~ $	expected = 2
+\\ $ ~~~~~~~~ $	self.assertTrue(actual == expected)
+\end{algorithm}
+
+\begin{algorithm}[H]
+    \textbf{def} test\_inner\_zero(self):
+\\ $ ~~~~~~~~ $actual = np.inner(self.array\_a, [0, 0, 0])
+\\ $ ~~~~~~~~ $expected = 0
+\\ $ ~~~~~~~~ $self.assertTrue(actual == expected)
+\end{algorithm}
+
+\begin{algorithm}[H]
+\textbf{def} test\_inner\_float(self):
+\\ $ ~~~~~~~~ $actual = np.inner(self.array\_a\_float, self.array\_b\_float)
+\\ $ ~~~~~~~~ $expected = 21.25
+\\ $ ~~~~~~~~ $self.assertTrue(actual == expected)
+\end{algorithm}
+
+\begin{algorithm}[H]
+\textbf{def} test\_inner\_prop1(self): 
+\\ $ ~~~~~~~~ $actual = np.inner(np.add(self.vector\_u,self.vector\_v), self.vector\_w)
+\\ $ ~~~~~~~~ $expected = np.add(np.inner(self.vector\_u,self.vector\_w), np.inner(self.vector\_v,self.vector\_w))
+\\ $ ~~~~~~~~ $self.assertTrue(actual == expected)
+\end{algorithm}
+
+\begin{algorithm}[H]
+\textbf{def} test\_inner\_prop2(self):
+\\ $ ~~~~~~~~ $actual = np.inner(self.scalar * self.vector\_v, self.vector\_w)
+\\ $ ~~~~~~~~ $expected = self.scalar * np.inner(self.vector\_v, self.vector\_w)
+\\ $ ~~~~~~~~ $self.assertTrue(actual == expected)
+\end{algorithm}
+
+\begin{algorithm}[H]
+\textbf{def} test\_inner\_prop3(self):
+\\ $ ~~~~~~~~ $actual = np.inner(self.vector\_v, self.vector\_w)
+\\ $ ~~~~~~~~ $expected = np.inner(self.vector\_w, self.vector\_v)
+\\ $ ~~~~~~~~ $self.assertTrue(actual == expected)
+\end{algorithm}
+
+\begin{algorithm}[H]
+\textbf{def} test\_inner\_prop4(self):
+\\ $ ~~~~~~~~ $actual = np.inner(self.vector\_zero, self.vector\_zero)
+\\ $ ~~~~~~~~ $expected = 0
+\\ $ ~~~~~~~~ $self.assertTrue(actual == expected)
+\end{algorithm}
+
+\begin{algorithm}[H]
+\textbf{def} test\_inner\_raises(self):
+\\ $ ~~~~~~~~ $with self.assertRaises(ValueError):
+\\ $ ~~~~~~~~~~~~~~~~ $actual = np.inner([2, 2, 3], [2, 1])
 \end{algorithm}
 
 %\subsection{linalg.det, linalg.slogdet}

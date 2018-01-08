@@ -25,9 +25,11 @@ class TestLinAlg(unittest.TestCase):
 
         self.assertTrue(actual == expected)
 
-    def test_vdot_matrix(self):
-        actual = np.vdot(self.array_a, self.array_a)
-        expected = 78
+    def test_vdot_complexSquare(self):
+        self.setupForComplex()
+
+        actual = np.vdot(self.complex_a, self.complex_a)
+        expected = 30+0j
 
         self.assertTrue(actual == expected)
         
@@ -54,7 +56,6 @@ class TestLinAlg(unittest.TestCase):
         expected = -70-8j
 
         self.assertTrue(actual == expected)
-
 
     def test_vdot_float(self):
         actual = np.vdot(self.array_a_float, self.array_b_float)

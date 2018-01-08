@@ -21,8 +21,8 @@ class TestLinAlg(unittest.TestCase):
         """ Square Test [1]"""
 
         """ Perpendicular Test [1]"""
-        self.array_per_1com = [2.0 , 1.0, 4.0]
-        self.array_per_2com = [1.0 , -1.0, -0.25]
+        self.array_per_1 = [2.0 , 1.0, 4.0]
+        self.array_per_2 = [1.0 , -1.0, -0.25]
 
         """
             Testing numpy.linalg.dot() function
@@ -60,7 +60,11 @@ class TestLinAlg(unittest.TestCase):
         actual = np.dot(self.array_2, self.array_2)
         expected = [[18, 6], [12, 6]]
         self.assertTrue((actual == expected).all())
-    
+
+    def test_dot_perpendicuar(self):
+        actual = np.dot(self.array_per_1, self.array_per_2)
+        expected = 0
+        self.assertTrue((actual == expected).all())
     
 if __name__ == '__main__':
     unittest.main()
