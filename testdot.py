@@ -7,7 +7,8 @@ class TestLinAlg(unittest.TestCase):
         self.array_1 = [[1, 0], [0, 1]]
         self.array_2 = [[4, 1], [2, 2]]
 
-        """ Zero Test [1](http://gettingsharper.de/2011/11/30/vector-fun-dot-product/)"""
+        """ Zero Test [1]
+(http://gettingsharper.de/2011/11/30/vector-fun-dot-product/)"""
         self.array_zero = [0, 0]
 
         """ Commutative Test [1]"""

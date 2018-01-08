@@ -39,7 +39,8 @@ class TestLinAlg(unittest.TestCase):
     """http://mathworld.wolfram.com/InnerProduct.html"""
     def test_inner_prop1(self): 
         actual = np.inner(np.add(self.vector_u,self.vector_v), self.vector_w)
-        expected = np.add(np.inner(self.vector_u,self.vector_w), np.inner(self.vector_v,self.vector_w))
+        expected = np.add(np.inner(self.vector_u,self.vector_w),
+                          np.inner(self.vector_v,self.vector_w))
         self.assertTrue(actual == expected)
 
     def test_inner_prop2(self):

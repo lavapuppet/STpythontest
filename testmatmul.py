@@ -34,7 +34,8 @@ class TestLinAlg(unittest.TestCase):
 
     def test_matmul_distributivity(self):
         actual = np.matmul(self.matrix_a, np.add(self.matrix_b, self.matrix_c))
-        expected = np.add(np.matmul(self.matrix_a, self.matrix_b),np.matmul(self.matrix_a, self.matrix_c))
+        expected = np.add(np.matmul(self.matrix_a, self.matrix_b),
+                          np.matmul(self.matrix_a, self.matrix_c))
         self.assertTrue((actual == expected).all())
 
     def test_matmul_diag_commutative(self):
