@@ -44,8 +44,6 @@
 	\\ $ ~~~~~~~~~~~~~~~~ $actual = np.dot([ ], [1, 2])
 \end{algorithm}
 
-
-
 \begin{algorithm}[H]
 	\textbf{def} test\_dot\_iden(self):
 	\\ $ ~~~~~~~~ $actual = np.dot(self.array\_1, self.array\_2)
@@ -83,17 +81,54 @@
 \subsection{linalg.vdot}
 
 \begin{algorithm}[H]
-    \textbf{def} test\_vdot\_square(self):
+	\textbf{def} test\_vdot\_square(self):
+	\\ $ ~~~~~~~~ $actual = np.vdot(self.array\_a, self.array\_a)
+	\\ $ ~~~~~~~~ $expected = 78
+	\\ $ ~~~~~~~~ $self.assertTrue(actual == expected)
+\end{algorithm}
+
+\begin{algorithm}[H]
+    \textbf{def} test\_vdot\_matrix(self):
 \\ $ ~~~~~~~~ $actual = np.vdot(self.array\_a, self.array\_a)
 \\ $ ~~~~~~~~ $expected = 78
 \\ $ ~~~~~~~~ $self.assertTrue(actual == expected)
 \end{algorithm}
 
 \begin{algorithm}[H]
-	\textbf{def} test\_vdot\_square(self):
-	\\ $ ~~~~~~~~ $actual = np.vdot(self.array\_a, self.array\_a)
-	\\ $ ~~~~~~~~ $expected = 78
-	\\ $ ~~~~~~~~ $self.assertTrue(actual == expected)
+    \textbf{def} test\_vdot\_normal(self):
+\\ $ ~~~~~~~~ $self.setupForComplex()
+\\ $ ~~~~~~~~ $actual = np.vdot(self.complex\_a, self.complex\_b)
+\\ $ ~~~~~~~~ $expected = 70-8j
+\\ $ ~~~~~~~~ $self.assertTrue(actual == expected)
+\end{algorithm}
+
+\begin{algorithm}[H]
+    \textbf{def} test\_vdot\_com(self):
+\\ $ ~~~~~~~~ $self.setupForComplex()
+\\ $ ~~~~~~~~ $actual = np.vdot(self.array\_a, self.array\_b)
+\\ $ ~~~~~~~~ $expected = np.vdot(self.array\_b, self.array\_a)
+\\ $ ~~~~~~~~ $self.assertTrue(actual == expected)
+\end{algorithm}
+
+\begin{algorithm}[H]
+    \textbf{def} test\_vdot\_negative(self):
+\\ $ ~~~~~~~~ $self.setupForComplex()
+\\ $ ~~~~~~~~ $actual = np.vdot(self.complex\_c, self.complex\_a)
+\\ $ ~~~~~~~~ $expected = -70-8j
+\\ $ ~~~~~~~~ $self.assertTrue(actual == expected)
+\end{algorithm}
+
+\begin{algorithm}[H]
+    \textbf{def} test\_vdot\_float(self):
+\\ $ ~~~~~~~~ $actual = np.vdot(self.array\_a\_float, self.array\_b\_float)
+\\ $ ~~~~~~~~ $expected = 14.25
+\\ $ ~~~~~~~~ $self.assertTrue(actual == expected)
+\end{algorithm}
+
+\begin{algorithm}[H]
+    \textbf{def} test\_vdot\_empty(self):
+\\ $ ~~~~~~~~ $actual = np.vdot([ ],[ ])
+\\ $ ~~~~~~~~ $self.assertFalse(actual)
 \end{algorithm}
 
 %\subsection{linalg.det, linalg.slogdet}

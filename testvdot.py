@@ -31,7 +31,6 @@ class TestLinAlg(unittest.TestCase):
 
         self.assertTrue(actual == expected)
         
-
     def test_vdot_normal(self):
         self.setupForComplex()
 
