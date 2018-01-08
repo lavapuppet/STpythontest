@@ -4,7 +4,7 @@
 \usepackage[boxed]{algorithm}   % drop [boxed] is no box around algorithm wanted
 \usepackage[noend]{algorithmic} % drop [noend] if endif, endwhile, etc wanted
 \renewcommand{\algorithmiccomment}[1]{\hfill // #1}
-
+\usepackage{graphicx}
 
 \usepackage[
     backend=biber,
@@ -132,8 +132,14 @@
 \end{algorithm}
 
 %\subsection{linalg.det, linalg.slogdet}
-%\subsection{linalg.multi\_dot}	
 
+\subsection{linalg.multi\_dot}	
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.70\textwidth]{snippets/raises.png}
+	\caption{Raising exception in dot product.}
+	\label{fig:rai}
+\end{figure}
 
 \newpage	
 \section{Black-box Testing}
