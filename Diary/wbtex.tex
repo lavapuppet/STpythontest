@@ -1,8 +1,35 @@
 In this section we aim to use what we can see from the functions themselves to satisfy some coverage
 criteria. To evaluate coverage we will use the coverage.py package. This can evaluate both statement and branch coverage and enumerate which statements or branches were not executed.
 
-\subsection{node coverage}
+The function we have chosen to white box test is the multi\_dot() function and it's subsidiary functions \_multi\_dot() and multi\_dot\_three().
+
+\paragraph{Node Coverage}
 
 
-For node coverage we have the critereon that our tests cause all statements to be executed.m
+For node coverage we have the critereon that our tests cause all statements to be executed. Figure 1shows the control flow graph for the functions under test. 
 
+
+
+\paragraph{Edge Coverage}
+
+For edge coverage we have the critereon that our tests cause all branches to execute. In this case we have the set of edges \{(1,2),(1,3),(1,4),(4,5),(4,6),(5,6),(6,7),(6,8),(8,9),(8,10),(8,12),(12,10),(10,16),(9,11),(11,13),(13,14),(13,15),(15,16),(16,17),(16,18),(16,19)\}.
+Our test requirements are that every edge is contained in at least one of our test paths.
+
+\subsection{Test: Arguments<2}
+This test gives us node coverage for \{1,2\} and branch coverage for \{(1,2)\}. It returns a raises value error.
+
+\subsection{Test: Arguments=2}
+
+This test gives us node coverage for \{1,3\} and branch coverage for \{(1,3)\}. It returns the dot product of the two.
+
+
+\subsection{Test: Arguments=3,dimension of 1st argument = 1}
+
+This test gives us node coverage for \{1,2\} and branch coverage for \{(1,2)\}. It returns a raises value error.
+
+
+
+\subsection{Test: Arguments=3,dimension of last argument = 1}
+
+
+\subsection{Test: Arguments=3,dimension of first and last argument = 1}
