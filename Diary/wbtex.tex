@@ -19,16 +19,18 @@ Our test requirements are that every edge is contained in at least one of our te
 //
 With the below suite of tests we achieve full node and branch coverage.
 \subsection{Test: Arguments$<$2}
-
+For this case the test test\_multi\_dot\_raises was created. See Appendix for test specifics.
 This test gives us node coverage for \{1,2\} and branch coverage for \{(1,2)\}. It returns a raises value error.
 
 \subsection{Test: Arguments=2}
 
+For this case the test test\_multi\_two was created. See Appendix for test specifics.
 This test gives us node coverage for \{1,3\} and branch coverage for \{(1,3)\}. It returns the dot product of the two.
 
 
 \subsection{Test: Arguments=3,dimension of 1st argument = 1}
 
+For this case the test test\_multi\_ndim\_10 was created. See Appendix for test specifics.
 This test gives us node coverage for \{1,4,5,6,8,9,11,13,14,16,17\} and branch coverage for \{(1,4),
 \\
 (4,5),(6,8),(8,9),(9,11),(11,13),(13,14),(14,16),(16,18)\}.
@@ -38,6 +40,7 @@ This test gives us node coverage for \{1,4,5,6,8,9,11,13,14,16,17\} and branch c
 
 \subsection{Test: Arguments=3,dimension of last argument = 1}
 
+For this case the test test\_multi\_ndim\_01 was created. See Appendix for test specifics.
 
 This test gives us node coverage for \{1,4,6,7,8,9,11,13,15,16,18\} and branch coverage for \{(1,4),
 
@@ -47,6 +50,7 @@ This test gives us node coverage for \{1,4,6,7,8,9,11,13,15,16,18\} and branch c
 
 \subsection{Test: Arguments$<$3,dimension of first and last argument = 1}
 
+For this case the test test\_multi\_ndim\_11 was created. See Appendix for test specifics.
 
 This test gives us node coverage for \{1,4,5,6,7,8,10,12,10,16,17\} and fulfils the requirements that the edges {(8,10),(10,12),(12,10),(16,19)} are executed.
 
@@ -54,6 +58,7 @@ This test gives us node coverage for \{1,4,5,6,7,8,10,12,10,16,17\} and fulfils 
 \subsection{Test: Arguments=3,dimension of first and last argument $>$ 1}
 
 
+For this case the test test\_multi\_ndim\_00 was created. See Appendix for test specifics.
 This test gives us node coverage for \{1,4,6,8,9,11,13,14,16,19\} and fulfils the final requirement that the edge (16,19) is executed.
 
 
