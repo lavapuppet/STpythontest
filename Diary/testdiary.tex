@@ -1,6 +1,11 @@
  \documentclass[a4paper,11pt]{article}
 \usepackage{fullpage}
 \usepackage{amsmath}
+\usepackage[boxed]{algorithm}   % drop [boxed] is no box around algorithm wanted
+\usepackage[noend]{algorithmic} % drop [noend] if endif, endwhile, etc wanted
+\renewcommand{\algorithmiccomment}[1]{\hfill // #1}
+
+
 \usepackage[
     backend=biber,
     style=ieee,
@@ -18,7 +23,84 @@
 
     \renewcommand{\thesubsection}{\thesection.\Alph{subsection}}
 
-    \begin{document}
+
+\begin{document}
+	
+	%\tableofcontents 
+	
+\section{Appendix}
+\subsection{linalg.dot}
+
+\begin{algorithm}[H]
+	\textbf{def} test\_dot\_corner(self):
+	\\ $ ~~~~~~~~ $actual = np.dot([ ], [ ])
+	\\ $ ~~~~~~~~ $expected = False
+	\\ $ ~~~~~~~~ $self.assertEqual(actual, expected);
+\end{algorithm}
+
+\begin{algorithm}[H]
+	\textbf{def} test\_dot\_corner2(self):
+	\\ $ ~~~~~~~~ $with self.assertRaises(ValueError):
+	\\ $ ~~~~~~~~~~~~~~~~ $actual = np.dot([ ], [1, 2])
+\end{algorithm}
+
+
+
+\begin{algorithm}[H]
+	\textbf{def} test\_dot\_iden(self):
+	\\ $ ~~~~~~~~ $actual = np.dot(self.array\_1, self.array\_2)
+	\\ $ ~~~~~~~~ $expected = [[4, 1], [2, 2]]
+	\\ $ ~~~~~~~~ $self.assertTrue((actual == expected).all())
+\end{algorithm}
+
+\begin{algorithm}[H]
+	\textbf{def} test\_dot\_zero(self):
+	\\ $ ~~~~~~~~ $actual = np.dot(self.array\_zero, self.array\_2)
+	\\ $ ~~~~~~~~ $expected = 0
+	\\ $ ~~~~~~~~ $self.assertTrue((actual == expected).all())
+\end{algorithm}
+
+\begin{algorithm}[H]
+    \textbf{def} test\_dot\_com(self):
+\\ $ ~~~~~~~~ $actual = np.dot(self.array\_com\_1, self.array\_com\_2)
+\\ $ ~~~~~~~~ $expected = np.dot(self.array\_com\_2, self.array\_com\_1)
+\\ $ ~~~~~~~~ $self.assertTrue((actual == expected).all())
+\end{algorithm}
+
+\begin{algorithm}[H]
+    \textbf{def} test\_dot\_square(self):
+\\ $ ~~~~~~~~ $actual = np.dot(self.array\_2, self.array\_2)
+\\ $ ~~~~~~~~ $expected = [[18, 6], [12, 6]]
+\\ $ ~~~~~~~~ $self.assertTrue((actual == expected).all())
+\end{algorithm}
+
+\begin{algorithm}[H]
+    \textbf{def} test\_dot\_raises(self):
+\\ $ ~~~~~~~~ $with self.assertRaises(ValueError):
+\\ $ ~ ~~~~~~~~ ~~~~~~~ $actual = np.dot([2, 2, 3], [2, 1])
+\end{algorithm}
+
+\subsection{linalg.vdot}
+
+\begin{algorithm}[H]
+    \textbf{def} test\_vdot\_square(self):
+\\ $ ~~~~~~~~ $actual = np.vdot(self.array\_a, self.array\_a)
+\\ $ ~~~~~~~~ $expected = 78
+\\ $ ~~~~~~~~ $self.assertTrue(actual == expected)
+\end{algorithm}
+
+\begin{algorithm}[H]
+	\textbf{def} test\_vdot\_square(self):
+	\\ $ ~~~~~~~~ $actual = np.vdot(self.array\_a, self.array\_a)
+	\\ $ ~~~~~~~~ $expected = 78
+	\\ $ ~~~~~~~~ $self.assertTrue(actual == expected)
+\end{algorithm}
+
+%\subsection{linalg.det, linalg.slogdet}
+%\subsection{linalg.multi\_dot}	
+
+
+\newpage	
 \section{Black-box Testing}
 \subsection{linalg.dot}
 \subsubsection{documentation}
@@ -257,9 +339,7 @@ test\_types: This runs the test\_three\_inputs\_matrices above using integers, d
 
 \section{White-Box Test}
 
-\section{Appendix}
-\subsection{linalg.det, linalg.slogdet}
-\subsection{linalg.multi\_dot}
+
 
 
 \end{document}
