@@ -1,0 +1,63 @@
+\begin{center}
+  \begin{tikzpicture}[%
+    ->,
+    shorten >=2pt,
+    >=stealth,
+    node distance=2cm,
+    noname/.style={%
+      circle,
+      minimum width=5pt,
+      minimum height=3pt,
+      draw
+    }
+  ]
+
+    \node[noname] (1)                                    {1};
+    \node[noname] (3) [below of= 1]                      {3};
+    \node[noname] (2) [left of= 3]                       {2};
+    \node[noname] (4) [right of= 3]                      {4};
+    \node[noname] (5) [below left of= 4]                 {5};
+    \node[noname] (6) [below right of= 5]                {6};
+    \node[noname] (7) [below left of= 6]                 {7};
+    \node[noname] (8) [below right of= 7]                {8};
+    \node[noname] (9) [below left of= 8]                 {9};
+    \node[noname] (10) [below right of =8]               {10};
+    \node[noname] (11) [below of= 9]                     {11};
+    \node[noname] (12) [below right of= 10]              {12};
+    \node[noname] (13) [below of= 11]                    {13};
+    \node[noname] (14) [below left of= 13]               {14};
+    \node[noname] (15) [below right of = 13]             {15};
+    \node[noname] (16) [below right of= 15]              {16};
+    \node[noname] (18) [below of= 16]                    {18};
+    \node[noname] (17) [left of= 18]                     {17};
+    \node[noname] (19) [right of= 18]                    {19};
+
+    \path (1) edge                   node {} (2)
+          (1) edge                   node {} (3)
+          (1) edge                   node {} (4)
+          (4) edge                   node {} (5)
+          (4) edge                   node {} (6)
+          (5) edge                   node {} (6)
+          (7) edge                   node {} (8)
+          (6) edge                   node {} (8)
+          (6) edge                   node {} (7)
+          (8) edge                   node {} (9)%[bend right=20pt] 
+          (8) edge                   node {} (10)%[bend right=20pt] 
+          (9) edge                   node {} (11)
+          (11) edge                   node {} (13)
+          (13) edge                   node {} (14)
+          (13) edge                   node {} (15)
+          (14) edge                   node {} (16)
+          (15) edge                   node {} (16)
+          (10) edge                   node {} (12)
+          (12) edge [bend right=30pt] node {} (10)
+          (10) edge                   node {} (16)
+          (16) edge                   node {} (17)
+          (16) edge                   node {} (18)
+          (16) edge                   node {} (19);
+  \end{tikzpicture}
+\end{center}
+
+
+
+
