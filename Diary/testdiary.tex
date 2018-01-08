@@ -76,7 +76,7 @@ In order to test this function, the input space is partitioned into three types 
 	
 	\item \textbf{Raises case:} This test is setup to ensure that a ValueError is raised when multiplying vectors of different dimensionality.
 
-
+\end{itemize}
 
 \subsection{linalg.multidot}
 Compute the dot product of two or more arrays in a single function call, while automatically selecting the fastest evaluation order.
@@ -181,18 +181,7 @@ In order to test the \textit{matmul} function tests have been made to check the 
 	\item \textbf{Raises Checks}
 \end{itemize}
 
-\subsection{linalg.tensordot}
-\subsubsection{documentation}
-Compute tensor dot product along specified axes for arrays >= 1-D.
 
-Given two tensors (arrays of dimension greater than or equal to one), a and b, and an array\_like object containing two array\_like objects, (a\_axes, b\_axes), sum the products of a‘s and b‘s elements (components) over the axes specified by a\_axes and b\_axes. The third argument can be a single non-negative integer\_like scalar, N; if it is such, then the last N dimensions of a and the first N dimensions of b are summed over.
-
-\subsubsection{tests}
-%\subsection{linalg.einsum}
-%\subsubsection{documentation}
-
-
-%\subsubsection{tests}
 \subsection{linalg.matrix\_power}
 \subsubsection{documentation}
 Raise a square matrix to the (integer) power n.\\
@@ -210,68 +199,7 @@ In order to test the \textit{matrix power} function tests have been made to chec
 %\subsubsection{documentation}
 
 
-%\subsubsection{tests}
-\subsection{linalg.eig}
-Compute the eigenvalues and right eigenvectors of a square array.
-\paragraph{Paramaters}: 
-a : (..., M, M) array\\
-\paragraph{Returns}:    
-w : (..., M) array\\
-Raises: 
-LinAlgError
-If the eigenvalue computation does not converge.
 
-\subsubsection{documentation}
-\subsubsection{tests}
-\subsection{linalg.eigh}
-
-\subsubsection{documentation}
-Return the eigenvalues and eigenvectors of a Hermitian or symmetric matrix.
-
-Returns two objects, a 1-D array containing the eigenvalues of a, and a 2-D square array or matrix (depending on the input type) of the corresponding eigenvectors (in columns).
-\paragraph{Paramaters}: 
-a : (..., M, M) array\\
-\paragraph{Returns}:    
-w : (..., M) ndarray
-The eigenvalues in ascending order, each repeated according to its multiplicity.\\
-Raises: 
-LinAlgError
-If the eigenvalue computation does not converge.\\
-
-
-
-\subsubsection{tests}
-\subsection{linalg.eigvalsh}
-\subsubsection{documentation}
-Compute the eigenvalues of a Hermitian or real symmetric matrix.
-
-Main difference from eigh: the eigenvectors are not computed.
-\paragraph{Paramaters}: 
-a : (..., M, M) array\_like\\
-\paragraph{Returns}:    
-w : (..., M,) ndarray
-The eigenvaues in ascending order, each repeated according to its multiplicity.\\
-Raises: 
-LinAlgError if the eigenvalue computation does not converge.
-
-\subsubsection{tests}
-\subsection{linalg.eigvals}
-\subsubsection{documentation}
-Compute the eigenvalues of a general matrix.
-
-Main difference between eigvals and eig: the eigenvectors aren’t returned.
-
-
-\paragraph{Paramaters}: 
-a : (..., M, M) array\_like
-A complex- or real-valued matrix whose eigenvalues will be computed.\\
-\paragraph{Returns}:    
-w : (..., M,) ndarray
-The eigenvalues, each repeated according to its multiplicity. They are not necessarily ordered, nor are they necessarily real for real matrices.\\
-Raises: 
-LinAlgError
-If the eigenvalue computation does not converge.\\
-\subsubsection{tests}
 \subsection{linalg.norm}
 \subsubsection{documentation}
 Matrix or vector norm.
@@ -377,238 +305,22 @@ A separate testclass was created to test linalg functions with various datatypes
 
 
 \subsection{linalg.dot}
-\begin{algorithm}[H]
-	\textbf{class} numpy \textbf{as} np
-\\	\textbf{import} unittest
-\\
-\\ \textbf{class} TestLinAlg(unittest.TestCase):
-\\
-\\$ ~~~~~~~~ $\textbf{def} setUp(self):	
-\\ $ ~~~~~~~~ $''\url{http://gettingsharper.de/2011/11/30/vector-fun-dot-product/}" 
-\\
-\\ $ ~~~~~~~~ $\textit{Basic Identity Test / Square Test}
-\\ $ ~~~~~~~~ $self.array\_1 = [[1, 0], [0, 1]]
-\\ $ ~~~~~~~~ $self.array\_2 = [[4, 1], [2, 2]]
-\\ $ ~~~~~~~~ $
-\\ $ ~~~~~~~~ $\textit{Zero Test}
-\\ $ ~~~~~~~~ $self.array\_zero = [0, 0]
-\\ $ ~~~~~~~~ $
-\\ $ ~~~~~~~~ $\textit{Commutative Test}
-\\ $ ~~~~~~~~ $self.array\_com\_1 = [-3.22 , 2.25, -0.13]
-\\ $ ~~~~~~~~ $self.array\_com\_2 = [0.0 , -6.7, 10.0]   
-\\ $ ~~~~~~~~ $
-\\ $ ~~~~~~~~ $\textit{Linear Test}
-\\ $ ~~~~~~~~ $self.array\_com\_3 = [12.4, -1.7, 3.15]
-\\ $ ~~~~~~~~ $self.scalar = 0.22
-\\ $ ~~~~~~~~ $
-\\ $ ~~~~~~~~ $\textit{Perpendicular Test}
-\\ $ ~~~~~~~~ $self.array\_per\_1 = [2.0 , 1.0, 4.0]
-\\ $ ~~~~~~~~ $self.array\_per\_2 = [1.0 , -1.0, -0.25]
-\end{algorithm}
-
-\begin{algorithm}[H]
-	\textbf{def} test\_dot\_corner(self):
-	\\ $ ~~~~~~~~ $actual = np.dot([ ], [ ])
-	\\ $ ~~~~~~~~ $expected = False
-	\\ $ ~~~~~~~~ $self.assertEqual(actual, expected);
-\end{algorithm}
-
-\begin{algorithm}[H]
-	\textbf{def} test\_dot\_corner2(self):
-	\\ $ ~~~~~~~~ $with self.assertRaises(ValueError):
-	\\ $ ~~~~~~~~~~~~~~~~ $actual = np.dot([ ], [1, 2])
-\end{algorithm}
-
-\begin{algorithm}[H]
-	\textbf{def} test\_dot\_identity(self):
-	\\ $ ~~~~~~~~ $actual = np.dot(self.array\_1, self.array\_2)
-	\\ $ ~~~~~~~~ $expected = [[4, 1], [2, 2]]
-	\\ $ ~~~~~~~~ $self.assertTrue((actual == expected).all())
-\end{algorithm}
-
-\begin{algorithm}[H]
-	\textbf{def} test\_dot\_zero(self):
-	\\ $ ~~~~~~~~ $actual = np.dot(self.array\_zero, self.array\_2)
-	\\ $ ~~~~~~~~ $expected = 0
-	\\ $ ~~~~~~~~ $self.assertTrue((actual == expected).all())
-\end{algorithm}
-
-\begin{algorithm}[H]
-    \textbf{def} test\_dot\_commutative(self):
-\\ $ ~~~~~~~~ $actual = np.dot(self.array\_com\_1, self.array\_com\_2)
-\\ $ ~~~~~~~~ $expected = np.dot(self.array\_com\_2, self.array\_com\_1)
-\\ $ ~~~~~~~~ $self.assertTrue((actual == expected).all())
-\end{algorithm}
-
-\begin{algorithm}[H]
-    \textbf{def} test\_dot\_square(self):
-\\ $ ~~~~~~~~ $actual = np.dot(self.array\_2, self.array\_2)
-\\ $ ~~~~~~~~ $expected = [[18, 6], [12, 6]]
-\\ $ ~~~~~~~~ $self.assertTrue((actual == expected).all())
-\end{algorithm}
-
-\begin{algorithm}[H]
-	
-	\textbf{def} test\_dot\_perpendicuar(self):
-	\\ $ ~~~~~~~~ $	actual = np.dot(self.array\_per\_1, self.array\_per\_2)
-	\\ $ ~~~~~~~~ $	expected = 0
-	\\ $ ~~~~~~~~ $	self.assertTrue((actual == expected).all())
-\end{algorithm}
-
-
-\begin{algorithm}[H]
-    \textbf{def} test\_dot\_raises(self):
-\\ $ ~~~~~~~~ $with self.assertRaises(ValueError):
-\\ $ ~ ~~~~~~~~ ~~~~~~~ $actual = np.dot([2, 2, 3], [2, 1])
-\end{algorithm}
+\lstinputlisting{../testdot.py}
 
 \subsection{linalg.vdot}
-\begin{algorithm}[H]
-\textbf{class} TestLinAlg(unittest.TestCase):
-\\ $ ~~~~~~~~ $\textbf{def} setUp(self):
-\\ $ ~~~~~~~~~~~~~~~~ $self.array\_a = np.array([[1, 4], [5, 6]])
-\\ $ ~~~~~~~~~~~~~~~~ $self.array\_b = np.array([[4, 1], [2, 2]])
-\\
-\\ $ ~~~~~~~~~~~~~~~~ $self.array\_a\_float = np.array([1.0, 4.5])
-\\ $ ~~~~~~~~~~~~~~~~ $self.array\_b\_float = np.array([3.0, 2.5])
-\\
-\\ $ ~~~~~~~~ $\textbf{def} setupForComplex(self):
-\\ $ ~~~~~~~~~~~~~~~~ $self.complex\_a = np.array([1+2j,3+4j])   
-\\ $ ~~~~~~~~~~~~~~~~ $self.complex\_b = np.array([5+6j,7+8j])
-\\ $ ~~~~~~~~~~~~~~~~ $self.complex\_c = np.array([-5-6j,-7-8j])
-\end{algorithm}
-
-
-\begin{algorithm}[H]
-	\textbf{def} test\_vdot\_square(self):
-	\\ $ ~~~~~~~~ $actual = np.vdot(self.array\_a, self.array\_a)
-	\\ $ ~~~~~~~~ $expected = 78
-	\\ $ ~~~~~~~~ $self.assertTrue(actual == expected)
-\end{algorithm}
-
-\begin{algorithm}[H]
-	\textbf{def} test\_vdot\_complexSquare(self):
-	\\ $ ~~~~~~~~ $self.setupForComplex()
-	\\
-	\\ $ ~~~~~~~~ $actual = np.vdot(self.complex\_a, self.complex\_a)
-	\\ $ ~~~~~~~~ $expected = 30+0j
-	\\
-	\\ $ ~~~~~~~~ $self.assertTrue(actual == expected)
-\end{algorithm}
-
-\begin{algorithm}[H]
-    \textbf{def} test\_vdot\_normal(self):
-\\ $ ~~~~~~~~ $self.setupForComplex()
-\\ $ ~~~~~~~~ $actual = np.vdot(self.complex\_a, self.complex\_b)
-\\ $ ~~~~~~~~ $expected = 70-8j
-\\ $ ~~~~~~~~ $self.assertTrue(actual == expected)
-\end{algorithm}
-
-\begin{algorithm}[H]
-    \textbf{def} test\_vdot\_com(self):
-\\ $ ~~~~~~~~ $self.setupForComplex()
-\\ $ ~~~~~~~~ $actual = np.vdot(self.array\_a, self.array\_b)
-\\ $ ~~~~~~~~ $expected = np.vdot(self.array\_b, self.array\_a)
-\\ $ ~~~~~~~~ $self.assertTrue(actual == expected)
-\end{algorithm}
-
-\begin{algorithm}[H]
-    \textbf{def} test\_vdot\_negative(self):
-\\ $ ~~~~~~~~ $self.setupForComplex()
-\\ $ ~~~~~~~~ $actual = np.vdot(self.complex\_c, self.complex\_a)
-\\ $ ~~~~~~~~ $expected = -70-8j
-\\ $ ~~~~~~~~ $self.assertTrue(actual == expected)
-\end{algorithm}
-
-\begin{algorithm}[H]
-    \textbf{def} test\_vdot\_float(self):
-\\ $ ~~~~~~~~ $actual = np.vdot(self.array\_a\_float, self.array\_b\_float)
-\\ $ ~~~~~~~~ $expected = 14.25
-\\ $ ~~~~~~~~ $self.assertTrue(actual == expected)
-\end{algorithm}
-
-\begin{algorithm}[H]
-    \textbf{def} test\_vdot\_empty(self):
-\\ $ ~~~~~~~~ $actual = np.vdot([ ],[ ])
-\\ $ ~~~~~~~~ $self.assertFalse(actual)
-\end{algorithm}
+\lstinputlisting{../testvdot.py}
 
 \subsection{linalg.inner}
+\lstinputlisting{../testinner.py}
 
-\begin{algorithm}[H]
-    \textbf{def} setUp(self):
-\\
-\\ $ ~~~~~~~~ $self.array\_a = np.array([1, 2, 3])
-\\ $ ~~~~~~~~ $self.array\_b = np.array([0, 1, 0])
-\\
-\\ $ ~~~~~~~~ $self.array\_a\_float = np.array([1.0, 2.0, 4.5])
-\\ $ ~~~~~~~~ $self.array\_b\_float = np.array([3.0, 3.5, 2.5])
-\\
-\\ $ ~~~~~~~~ $\textit{Inner Product Wolfram} \\$ ~~~~~~~~ $\url{http://mathworld.wolfram.com/InnerProduct.html}
-\\ $ ~~~~~~~~ $self.vector\_u = np.array([1,2,3])
-\\ $ ~~~~~~~~ $self.vector\_v = np.array([1,2,1])
-\\ $ ~~~~~~~~ $self.vector\_w = np.array([4,5,6])
-\\ $ ~~~~~~~~ $self.scalar = 5
-\\ $ ~~~~~~~~ $self.vector\_zero = np.array([0, 0, 0])
-\end{algorithm}
+\subsection{linalg.outer}
+\lstinputlisting{../testouter.py}
 
+\subsection{linalg.matmul}
+\lstinputlisting{../testmatmul.py}
 
-\begin{algorithm}[H]
-	\textbf{def} test\_inner\_simple(self):
-\\ $ ~~~~~~~~ $	actual = np.inner(self.array\_a, self.array\_b)
-\\ $ ~~~~~~~~ $	expected = 2
-\\ $ ~~~~~~~~ $	self.assertTrue(actual == expected)
-\end{algorithm}
-
-\begin{algorithm}[H]
-    \textbf{def} test\_inner\_zero(self):
-\\ $ ~~~~~~~~ $actual = np.inner(self.array\_a, [0, 0, 0])
-\\ $ ~~~~~~~~ $expected = 0
-\\ $ ~~~~~~~~ $self.assertTrue(actual == expected)
-\end{algorithm}
-
-\begin{algorithm}[H]
-\textbf{def} test\_inner\_float(self):
-\\ $ ~~~~~~~~ $actual = np.inner(self.array\_a\_float, self.array\_b\_float)
-\\ $ ~~~~~~~~ $expected = 21.25
-\\ $ ~~~~~~~~ $self.assertTrue(actual == expected)
-\end{algorithm}
-
-\begin{algorithm}[H]
-\textbf{def} test\_inner\_prop1(self): 
-\\ $ ~~~~~~~~ $actual = np.inner(np.add(self.vector\_u,self.vector\_v), self.vector\_w)
-\\ $ ~~~~~~~~ $expected = np.add(np.inner(self.vector\_u,self.vector\_w), np.inner(self.vector\_v,self.vector\_w))
-\\ $ ~~~~~~~~ $self.assertTrue(actual == expected)
-\end{algorithm}
-
-\begin{algorithm}[H]
-\textbf{def} test\_inner\_prop2(self):
-\\ $ ~~~~~~~~ $actual = np.inner(self.scalar * self.vector\_v, self.vector\_w)
-\\ $ ~~~~~~~~ $expected = self.scalar * np.inner(self.vector\_v, self.vector\_w)
-\\ $ ~~~~~~~~ $self.assertTrue(actual == expected)
-\end{algorithm}
-
-\begin{algorithm}[H]
-\textbf{def} test\_inner\_prop3(self):
-\\ $ ~~~~~~~~ $actual = np.inner(self.vector\_v, self.vector\_w)
-\\ $ ~~~~~~~~ $expected = np.inner(self.vector\_w, self.vector\_v)
-\\ $ ~~~~~~~~ $self.assertTrue(actual == expected)
-\end{algorithm}
-
-\begin{algorithm}[H]
-\textbf{def} test\_inner\_prop4(self):
-\\ $ ~~~~~~~~ $actual = np.inner(self.vector\_zero, self.vector\_zero)
-\\ $ ~~~~~~~~ $expected = 0
-\\ $ ~~~~~~~~ $self.assertTrue(actual == expected)
-\end{algorithm}
-
-\begin{algorithm}[H]
-\textbf{def} test\_inner\_raises(self):
-\\ $ ~~~~~~~~ $with self.assertRaises(ValueError):
-\\ $ ~~~~~~~~~~~~~~~~ $actual = np.inner([2, 2, 3], [2, 1])
-\end{algorithm}
-
-%\subsection{linalg.det, linalg.slogdet}
+\subsection{linalg.matrixpower}
+\lstinputlisting{../testmatrixpower.py}
 
 \subsection{test\_multi\_dot}	
 \begin{figure}[H]
