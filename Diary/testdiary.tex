@@ -203,6 +203,9 @@ In order to test the \textit{inner} product functionality the test suite is divi
 		\\ where $ u, v, w $ are vectors and $ \alpha $ is a scalar.
 	\end{itemize}
 	
+	The first suite of tests check to see how the function behaves when a \emph{zero} case is introduced in the arguments and also if the function works with \emph{float} values. The second suite of tests check whether the \emph{inner} dot product verifies with the properties.
+	
+	
 \end{itemize}
 
 \subsection{linalg.outer}
@@ -221,13 +224,19 @@ Compute the outer product of two vectors.
 
 \subsubsection{Tests}
 
+The \emph{outer} product of two vectors behaves as shown below, given two vectors a = [a0, a1, ..., aM] and b = [b0, b1, ..., bN]. The outer product computes :
+\newline [[a0*b0 a0*bN... a0*bN]
+[a1*b0 ... ] \newline
+[~.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~      ] \newline
+[aM*b0...~~~~~~~~~~~~~~~~~~~~~~ aM*bN]] \newline
+
 In order to test the \textit{outer} function tests have been made to check the following:
 
 \begin{itemize}
-	\item \textbf{Regression Tests}
-	\item \textbf{Corner Test}
-	\item \textbf{Complex value Test}
-	\item \textbf{Dimension Test}
+	\item \textbf{Regression Tests:}  This test sets up a regression test that checks that the \emph{outer} product works as intended with a basic example that verifies the behaviour of the function. 
+	\item \textbf{Corner Test:} In order to check the case where the provided vector consists of zero's.
+	\item \textbf{Complex value Test: } Since, the documentation claims to also handle complex valued vectors this case makes an \emph{outer} product of two complex valued vectors.
+	\item \textbf{Dimension Test:} This test attempts to check how the \emph{outer} product handles vectors of varying sizes.
 \end{itemize}
 
 \subsection{linalg.matmul}
@@ -250,12 +259,16 @@ If both arguments are 2-D they are multiplied like conventional matrices.\\ If e
 \paragraph{Raises}:	\textbf{ValueError} If the last dimension of a is not the same size as the second-to-last dimension of b. If scalar value is passed.
 
 \subsubsection{Tests}
+
+
+
 In order to test the \textit{matmul} function tests have been made to check the following:
 
 \begin{itemize}
-	\item \textbf{Regression Tests}
-	\item \textbf{Commutative and Distributive Tests}
-	\item \textbf{Raises Checks}
+	\item \textbf{Regression Tests:} This test checks that the function works as intended.
+	\item \textbf{Commutative and Distributive Tests:}  These tests ensure that the \textit{matmul} function according to mathworld \footnote{http://mathworld.wolfram.com/MatrixMultiplication.html} obeys properties of commutativity and distributivity.
+	\item \textbf{Identity Test:} An identity matrix is multiplied with another matrix to check if the matrix is preserved on matrix multiplication.
+	\item \textbf{Raises Checks:} Two tests are setup to ensure that a ValueError is raised when multiplying vectors of different dimensionality and a matrix and scalar are multiplied.
 \end{itemize}
 
 
@@ -276,9 +289,9 @@ Raise a square matrix to the (integer) power n.\\ For positive integers n, the p
 In order to test the \textit{matrix power} function tests have been made to check the following:
 
 \begin{itemize}
-	\item \textbf{Regression Tests}
-	\item \textbf{Matrix Identity Tests}
-	\item \textbf{Matrix Negative Power Check}
+	\item \textbf{Regression Tests:} This test ensures that the matrix when powered by a $ num  geq  1 $ works as intended.
+	\item \textbf{Matrix Identity Tests:} This test ensures that a matrix powered by $ num  ==  0 $ produces an identity matrix of the same size. 
+	\item \textbf{Matrix Negative Power Check:} This test checks the \emph{matrix power} fuction when $ num  \leq  -1 $.
 \end{itemize}
 %\subsection{linalg.kron}
 %\subsubsection{documentation}
