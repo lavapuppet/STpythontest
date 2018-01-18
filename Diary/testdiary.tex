@@ -27,6 +27,7 @@ stringstyle=\color{red}\ttfamily,
     sorting=nyt,
     autolang=other
 ]{biblatex}
+
 \title{\textbf{Software Testing of \\ Numpy Linear Algebra Library\\
         by Team~$7$                                   % Replace t by team number
 }
@@ -44,6 +45,60 @@ stringstyle=\color{red}\ttfamily,
 	\tableofcontents 
 	
 \newpage
+\section{Introduction}
+In this project we develop black and white box tests for Python numpy’s linear algebra package linalg. \\
+\\
+The project is relevant since numpy linalg is widely used and linear algebra generally can be regarded as an essential scientific field field. Since linear equations are easy to solve many scientific areas include models where equations are approximated using linear equations. Since solutions to equations in many cases are relevant for practical problem solving linear algebra can be very useful, even in its easiest forms. Some areas in which it is used are module theory, representation theory, ring theory, group theory and Galois theory. In functional theory linear algebra is used to study infinite-dimensional problems. In this field many of the analytical solutions break down even though the linear algebra intuition remains. Linear algebra can be used to understand those areas better. \\
+\\
+The following tools are available through the linalg module in numpy: \\
+\\
+
+
+Core Linear Algebra Tools\\
+-------------------------\\
+Linear algebra basics:\\
+- norm$~~~~~~$             Vector or matrix norm\\
+- inv$~~~~~~~$             Inverse of a square matrix\\
+- solve$~~~~~$             Solve a linear system of equations\\
+- det$~~~~~~~$             Determinant of a square matrix\\
+- lstsq$~~~~~$             Solve linear least-squares problem\\
+- pinv$~~~~~~$             Pseudo-inverse (Moore-Penrose) calculated using a singular value decomposition\\
+- power$~~~~~$    Integer power of a square matrix\\
+\\
+Eigenvalues and decompositions:\\
+- eig$~~~~~~$             Eigenvalues and vectors of a square matrix\\
+- eigh$~~~~~$            Eigenvalues and eigenvectors of a Hermitian matrix\\
+- eigvals$~~$         Eigenvalues of a square matrix\\
+- eigvalsh$~$        Eigenvalues of a Hermitian matrix\\
+- qr$~~~~~~~$              QR decomposition of a matrix\\
+- svd$~~~~~~$             Singular value decomposition of a matrix\\
+- cholesky$~$        Cholesky decomposition of a matrix\\
+\\
+Tensor operations:\\
+- tensorsolve$~~~$     Solve a linear tensor equation\\
+- tensorinv$~~~~~$       Calculate an inverse of a tensor\\
+\\
+Exceptions:\\
+- LinAlgError     Indicates a failed linear algebra operation\\
+
+The following linalg functions which we wrote black box tests for: \\
+linalg.dot \\
+linalg. vdot \\
+linalg.inner \\
+linalg.outer \\
+linalg.matmul \\
+linalg.matrix\_power\\
+linalg.norm\\
+linalg.matrix\_rank\\
+linalg.det, slogdet \\
+linalg.multidot \\
+\\ 
+We also wrote white box tests for:\\
+linalg.multidot \\
+
+
+
+
 \section{Black-box Testing}
 \subsection{linalg.dot}
 \subsubsection{documentation}
