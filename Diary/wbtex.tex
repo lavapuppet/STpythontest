@@ -5,14 +5,14 @@ As our function contains a loop we want to include loop coverage.
 
 The function we have chosen to white box test is the multi\_dot() function and it's subsidiary functions \_multi\_dot() and multi\_dot\_three().
 
-
+This function performs the dot product of an array of arrays. It consists of several if/ else statements a recursive loop and several different return options. In our testing we want to ensure that all statments and branches are covered along with coverage of the loops. 
 
 
 
 \paragraph{Node Coverage}
 
 
-For node coverage we have the critereon that our tests cause all statements to be executed. Figure 1shows the control flow graph for the functions under test. 
+For node coverage we have the critereon that our tests cause all statements in the program to be executed. Figure 1 shows the control flow graph for the functions under test. 
 
 
 
@@ -27,22 +27,25 @@ With the below suite of tests we achieve full node and branch coverage.
 
 \paragraph{Loop Coverage}
 
-A loop is covered if in at least one test the body was executed 0 times, and if in some test the body was executed exactly once, and if in some test the body was executed more than once.
+A loop is covered if in at least one test executed the loop 0 times, if in some test the loop was executed exactly once, and if in some test the body was executed more than once.
+\begin{itemize}
+\item Zero times - Test 1 
+\item Once - Test 5
+\item Many times - test 7
+\end{itemize}
 
-
-
-
-\subsection{Test: Arguments$<$2}
+\subsection{Test 1: Arguments$<$2}
 For this case the test test\_multi\_dot\_raises was created. See Appendix for test specifics.
-This test gives us node coverage for \{1,2\} and branch coverage for \{(1,2)\}. It returns a raises value error.
+This test tests the path \{(1,2)\}. It returns a raises value error.
 
-\subsection{Test: Arguments=2}
+
+\subsection{Test 2: Arguments=2}
 
 For this case the test test\_multi\_two was created. See Appendix for test specifics.
-This test gives us node coverage for \{1,3\} and branch coverage for \{(1,3)\}. It returns the dot product of the two.
+This test executes the path for \{(1,3)\}. It returns the dot product of the two.
 
 
-\subsection{Test: Arguments=3,dimension of 1st argument = 1}
+\subsection{Test 3: Arguments=3,dimension of 1st argument = 1}
 
 For this case the test test\_multi\_ndim\_10 was created. See Appendix for test specifics.
 This test gives us node coverage for \{1,4,5,6,8,9,11,13,14,16,17\} and branch coverage for \{(1,4),
@@ -52,7 +55,7 @@ This test gives us node coverage for \{1,4,5,6,8,9,11,13,14,16,17\} and branch c
 
 
 
-\subsection{Test: Arguments=3,dimension of last argument = 1}
+\subsection{Test 4: Arguments=3,dimension of last argument = 1}
 
 For this case the test test\_multi\_ndim\_01 was created. See Appendix for test specifics.
 
@@ -62,14 +65,14 @@ This test gives us node coverage for \{1,4,6,7,8,9,11,13,15,16,18\} and branch c
 
 
 
-\subsection{Test: Arguments$<$3,dimension of first and last argument = 1}
+\subsection{Test 5: Arguments$>$3,dimension of first and last argument = 1}
 
 For this case the test test\_multi\_ndim\_11 was created. See Appendix for test specifics.
 
 This test gives us node coverage for \{1,4,5,6,7,8,10,12,10,16,17\} and fulfils the requirements that the edges {(8,10),(10,12),(12,10),(16,19)} are executed.
 
 
-\subsection{Test: Arguments=3,dimension of first and last argument $>$ 1}
+\subsection{Test 6: Arguments=3,dimension of first and last argument $>$ 1}
 
 
 For this case the test test\_multi\_ndim\_00 was created. See Appendix for test specifics.

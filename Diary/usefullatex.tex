@@ -1,10 +1,11 @@
 \begin{figure}[H]
 \begin{center}
+%\resizebox {\columnwidth}{!} {
   \begin{tikzpicture}[%
     ->,
     shorten >=2pt,
     >=stealth,
-    node distance=2cm,
+    node distance=2.5cm,
     noname/.style={%
       circle,
       minimum width=5pt,
@@ -33,30 +34,31 @@
     \node[noname] (17) [left of= 18]                     {17};
     \node[noname] (19) [right of= 18]                    {19};
 
-    \path (1) edge                   node {} (2)
-          (1) edge                   node {} (3)
-          (1) edge                   node {} (4)
-          (4) edge                   node {} (5)
-          (4) edge                   node {} (6)
+    \path (1) edge                   node[left] {$args<2$} (2)
+          (1) edge                   node[above,rotate=90] {$args=2$} (3)
+          (1) edge                   node[right] {$args>2$} (4)
+          (4) edge                   node[above, rotate=45] {$dims[0]=1$} (5)
+          (4) edge                   node[right] {$dims[0]\neq1$} (6)
           (5) edge                   node {} (6)
           (7) edge                   node {} (8)
-          (6) edge                   node {} (8)
-          (6) edge                   node {} (7)
-          (8) edge                   node {} (9)%[bend right=20pt] 
-          (8) edge                   node {} (10)%[bend right=20pt] 
+          (6) edge                   node [right]{$dims[-1]\neq1$} (8)
+          (6) edge                   node [above,rotate=45]{$dims[-1]=1$} (7)
+          (8) edge                   node [above,rotate=45]{$args=3$} (9)%[bend right=20pt] 
+          (8) edge                   node [above,rotate=315]{$args\neq 3$} (10)%[bend right=20pt] 
           (9) edge                   node {} (11)
           (11) edge                   node {} (13)
-          (13) edge                   node {} (14)
-          (13) edge                   node {} (15)
+          (13) edge                   node [above,rotate=45]{$C1<C2$} (14)
+          (13) edge                   node [above,rotate=315]{$C2<C1$} (15)
           (14) edge                   node {} (16)
           (15) edge                   node {} (16)
-          (10) edge                   node {} (12)
+          (10) edge                   node [below, rotate=315]{$i\neq j$} (12)
           (12) edge [bend right=30pt] node {} (10)
-          (10) edge                   node {} (16)
-          (16) edge                   node {} (17)
-          (16) edge                   node {} (18)
-          (16) edge                   node {} (19);
+          (10) edge                   node [left] {i=j} (16)
+          (16) edge                   node [above,rotate=45]{$last \& 1st$} (17)
+          (16) edge                   node [above,rotate=90]{$last \lor 1st$} (18)
+          (16) edge                   node [above,rotate=315]{otherwise} (19);
   \end{tikzpicture}
+ %   }
 \end{center}
 \caption{The control flow graph for multi\_dot(),multi\_dot\_three() and \_multi\_dot()}
 \end{figure}
