@@ -19,8 +19,9 @@ class WhiteBox(unittest.TestCase):
         self.array_2_2_identity = np.identity(2)
         self.array_1 = np.array([[1,2],[3,4]])
         self.array_2 = np.array([[5,6],[7,8]])
-        self.array_3 = np.array([[9,10,11],[12,13,14],[15,16,17]])
-        self.array_4 = np.array([[6,5],[5,3],[12,15]])
+        self.array_3 = np.array([[9],[12],[15]])
+        self.array_4 = np.array([[6,5,12],[5,3,15]])
+        self.array_5 = np.array([[6,5],[5,3],[12,15]])
         #self.array_multi_5 = np.rand.rand(3,2)
 
         """ Empty Test [1](http://gettingsharper.de/2011/11/30/vector-fun-dot-product/)"""
@@ -28,8 +29,8 @@ class WhiteBox(unittest.TestCase):
 
         """Linear Test [1]"""
         self.array_com_3 = [12.4, -1.7, 3.15]
-        self.scalar = 0.22
-        self.sint = np.array([7,7])
+        self.scalar = np.array([0.22])
+        self.sint = np.array([7,7]) 
         self.sfloat = np.array([6.6,6.6])
 
         """ Basic test no need to test with floats/ints/complex as this function doesn't differentiate """
@@ -62,7 +63,7 @@ class WhiteBox(unittest.TestCase):
         self.assertTrue((actual == expected).all())
         
     def test_multi_ndim_00(self):
-        actual = linpy.multi_dot([self.array_4,self.array_1, self.array_2])
+        actual = linpy.multi_dot([self.array_5,self.array_1, self.array_2])
         expected = np.array([[329,382],[224,260],[873,1014]])
         self.assertTrue((actual == expected).all())
 
@@ -77,6 +78,10 @@ class WhiteBox(unittest.TestCase):
         expected = np.array([6190.8])
         self.assertAlmostEqual(actual, expected)
         
+    def test_many_ndim_00(self):
+        actual = linpy.multi_dot([self.sint,self.array_1, self.array_2,self.array_4,self.array_3,self.scalar])
+        expected = np.array([62000.4])
+        self.assertAlmostEqual(actual, expected)
 
 if __name__ == '__main__':
     unittest.main()
