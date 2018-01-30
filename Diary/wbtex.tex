@@ -5,7 +5,7 @@ As our function contains a loop we want to include loop coverage.
 
 The function we have chosen to white box test is the multi\_dot() function and it's subsidiary functions \_multi\_dot() and multi\_dot\_three().
 
-This function performs the dot product of an array of arrays. It consists of several if/ else statements a recursive loop and several different return options. In our testing we want to ensure that all statments and branches are covered along with coverage of the loops. 
+This function performs the dot product of an array of arrays. It consists of several if/ else statements, a recursive loop and several different return options. In our testing we want to ensure that all statments and edges of length 2 are covered insofar as possible along with coverage of the loops. 
 
 
 
@@ -17,17 +17,19 @@ For node coverage we have the critereon that our tests cause all statements in t
 
 
 \paragraph{Edge Coverage}
-
-For edge coverage we have the critereon that our tests cause all branches to execute. In this case we have the set of edges \\
-\{(1,2),(1,3),(1,4),(4,5),(4,6),(5,6),(6,7),(6,8),(8,9),(8,10),(8,12),(12,10),(10,16),(9,11),(11,13)\\
-,(13,14),(13,15),(15,16),(16,17),(16,18),(16,19)\}.
-Our test requirements are that every edge is contained in at least one of our test paths.
+In our tests we endeavour to execute all edges of (up to) length 2. 
+For edge coverage we have the critereon that all edges of length two are executed i.e.
+we want to ensure that for each decision made all possible next decisions are executed. 
+Our test requirements are that every edge of length 2 is contained in at least one of our test paths.
 \\
-
+Note: This is not possible given the layout of the code under test for reasons given below in \emph{loop coverage}
 \paragraph{Loop Coverage}
 
-A loop is covered if in at least one test executed the loop 0 times, if in some test the loop was executed exactly once, and if in some test the body was executed more than once. In the case of this code we can't test it only once so we execute it a minimum number of times i.e. with four arrays.
+A loop is covered if in at least one test executed the loop 0 times, if in some test the loop was executed exactly once, and if in some test the body was executed more than once. 
+In the case of this code we can't test it only once so we execute it a minimum number of times i.e. with four arrays.
 This is because the function \_multi\_dot is only called when there are more than three arguments. It is a self calling function that iteratively divides the arrays based on a precomputed best order. it stops when the two indices passed are the same so the minimum number of calls is more than one.
+This also means that the edge from 8-10-16 cannot be tested.
+The test cases that test the loop functionality are 
 \begin{itemize}
 \item Zero times - Test 1 - The \_multi\_dot function is not called.  
 \item Minimum - Test 5.
@@ -35,57 +37,64 @@ This is because the function \_multi\_dot is only called when there are more tha
 \end{itemize}
 
 
-To achieve coverage for these cases we create a set of test paths that include all nodes and edges given above along with paths that execute the loop zero times, the minimum amount of times and many times. 
+To achieve coverage for these cases we create a set of test paths that between them include all nodes and edges of length 2 along with paths that execute the loop zero times, the minimum amount of times and many times. 
 
 \begin{enumerate}
-\item \{1,2\}  
-\item \{(1,3)\}
-\item \{1,4,5,6,8,9,11,13,14,16,18\}
-\item \{1,4,6,7,8,9,11,13,15,16,18\}
+\item \{1,2\}
+\item \{(1,3)\} 
+\item \{1,4,5,6,8,9,11,13,15,16,18\}
+\item \{1,4,6,7,8,9,11,13,14,16,18\}
 \item \{1,4,5,6,7,8,10,12,10,16,17\}
+
 \item \{1,4,6,8,9,11,13,14,16,19\}
-\item \{1,4,5,6,7,8,10,12,10,12,10,16,17\}
+\item \{1,4,5,6,8,10,12,10,12,10,16,18\}
+\item \{1,4,6,8,10,12,10,12,10,16,19\}
+\item \{1,4,5,6,7,8,9,11,13,14,16,17\} %% all <2 and C1<C2
+\item \{1,4,5,6,7,8,9,11,13,15,16,17\} %dims 1 for 0 & -1 and C1>C2
+\item \{1,4,6,8,11,13,15,16,19\} %dims >2 for all and C1>C2
+
+
 \end{enumerate}
+The path \{8,10,16\} cannot be executed due to the reasons given above.
 
+Below we describe the test cases for each test path.
 
-
-\paragraph{Test Path 1}\\
+\paragraph{Test Path 1}
 
 To construct a test case for the first path enumerated above we need to pass an array with fewer than 2 arguments. 
 The test test\_multi\_dot\_raises was created to execute path 1. It returns a raises value error.
 
 
-\paragraph{Test Path 2}\\
-
+\paragraph{Test Path 2}
 To execute path 2 the test test\_multi\_two was created. This path was constructed to have exactly two arguments in the passed array.
 This path calls the dot fonction and then returns. It returns the dot product of the two.
 
 
-\paragraph{Test Path 3}\\
-
-Test path 3 tests three different branches:\\
+\paragraph{Test Path 3}
+Test case - test\_multi\_ndim\_end1\\
+Test case 3 tests three different branches:\\
 \begin{itemize}
 \item By setting the number of array arguments to 3 we take the third arm of the first branch which brings us into the main body of the program. by choosing exactly 3 arguments we also test the branch calling the multi\_dot\_three function or the branch from 8-9.
-\item By not setting the dimension of the last argument to 1 we do not execute the if statement from 6-7.
-\item By setting the dimesion of the first argument to be 1 we execute the branches 4-5 and 16-17.
-\item The ordering of the arguments dictates which branch is taken within the multi\_dot\_three function. The test test\_multi\_ndim\_10 is ordered so that the branch from 13-14 is taken. 
+\item By not setting the dimension of the last argument to 1 we do not execute the if statement and instead go from 6-8.
+\item By setting the dimesion of the first argument to be 1 we execute the branches 4-5 and 16-18.
+\item The ordering of the arguments dictates which branch is taken within the multi\_dot\_three function. The test test\_multi\_ndim\_10 is ordered so that the branch from 13-15 is taken. 
 \end{itemize}
 
 
 %\paragraph{Test 4: Arguments=3,dimension of last argument = 1}
-\paragraph{Test path 4}\\
-test case - test\_multi\_ndim\_01\\
+\paragraph{Test path 4}
+test case - test\_multi\_ndim\_01\\ 
 Test case 3 tests three different branches:\\
 \begin{itemize}
 \item By setting the dimesion of the last argument to be 1  we execute the if statement branch from  6-7.
-\item By not setting the dimension of the first argument to 1 we do not execute the if statement branch from 4-5.
-\item The ordering of the arguments dictates which branch is taken within the multi\_dot\_three function. The arguments of test\_multi\_ndim\_01 are ordered so that the branch from 13-15 is taken. 
+\item By not setting the dimension of the first argument to 1 we do not execute the if statement branch from 4-5 and instead go 4-6.
+\item The ordering of the arguments dictates which branch is taken within the multi\_dot\_three function. The arguments of test\_multi\_ndim\_01 are ordered so that the branch from 13-14 is taken. 
 \end{itemize}
 
 
 
 %\paragraph{Test 5: Arguments$>$3,dimension of first and last argument = 1}
-\paragraph{Test Path 5}\\
+\paragraph{Test Path 5}
 
 test case - test\_multi\_ndim\_11\\
 Test case 3 tests three different branches:\\
@@ -97,18 +106,43 @@ Test case 3 tests three different branches:\\
 \end{itemize}
 
 
-%\paragraph{Test 6: Arguments=3,dimension of first and last argument $>$ 1}
-\paragraph{Test Path 6}
+\paragraph{Test Path 6} %1-4-6-8-9-11-13-14-16-19
 
 test case - test\_multi\_ndim\_00\\
-This test was created to test the case where neither of the if loops from 4-5 and 6-7 are executed. This also gives that the if statement from 16-19 is executed.  
+This path was constructed for the sole purpose of testing he edge of length two from 14-16-19.
+The test case was constructed by giving the first and last arguments of the array dimensions greater than 1, and by ordering the arrays within the main array to ensure that C1$<$C2 
+
+%\paragraph{Test 6: Arguments=3,dimension of first and last argument $>$ 1}
+\paragraph{Test Path 7}
+
+test case - test\_multi\_ndim\_00\\
+This test was created to test the case where neither of the if loops from 4-5 and 6-7 are executed. This also gives that the if statement from 14-16-19 is executed.  
 
 
 \paragraph{Test Path 7}
 test case - test\_many\_ndim\_11\\
 
-This test was created to test the case where the loop 10-12-10 is executed multiple times.
+This test was created to test the path where the loop 10-12-10 is executed multiple times.
 
- This also gives that the if statement from 16-19 is executed.  
+This also gives that the if statement given by the edge 10-16-17 is executed.  
 
 
+\paragraph{Test path 8}%\item \{1,4,6,8,10,12,10,12,10,16,19\}
+test case - test\_many\_ndim\_00\\
+
+This path was constructed solely to test the edge of length two from 10-16-19. to do this we ensure that the first and last arguments do not have dimesion of 1.
+
+\paragraph{Test path 9}%\item \{1,4,5,6,7,8,9,11,13,14,16,17\} %% all <2 and C1<C2
+
+Test case - test\_3\_C1\_00
+This path was constructed solely to test the edge of length two from 14-16-17. to do this we ensure that the first and last arguments have dimesionality of 1 and that C1$<$C2.
+
+\paragraph{Test path 10}%\item \{1,4,5,6,7,8,9,11,13,15,16,17\} %dims 1 for 0 & -1 and C1>C2
+Test case - test\_3\_C2\_11
+
+This path was constructed to test only the edge of length two from 15-16-17. to do this we ensure that the first and last arguments have dimesionality of 1 and that C1$>$C2.
+
+\paragraph{Test path 11}%\item \{1,4,6,8,11,13,15,16,19\} %dims >2 for all and C1>C2
+Test case - test\_3\_C2\_00
+
+This path was constructed to test only the edge of length two from 15-16-19. to do this we ensure that the first and last arguments do not have dimesion of 1 and that C1$>$C2.
